@@ -19,7 +19,9 @@ documentation and version control.
 
 ## Tools and Libraries Used
 -  Basic Python file handling
--  Virtual Environment tools
+-  Virtual Environment 
+-  pip
+-  VS Code
 -  Streamlit
 -  Git and GitHub
 
