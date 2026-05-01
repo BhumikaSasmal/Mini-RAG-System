@@ -7,7 +7,7 @@ Basic keyword-based search is implemented to answer user queries from the docume
 ## Problem Statement
 Week 1 is the foundation phase of the Mini RAG System project. The objective is not to build the final AI chatbot
 yet. The objective is to ensure understanding of the project workflow, have the correct development
-setup, can process basic text with Python, can run a simple Streamlit interface, and can maintain clean
+setup, process basic text with Python, run a simple Streamlit interface, and maintain clean
 documentation and version control.
 
 ## Week 1 Scope
