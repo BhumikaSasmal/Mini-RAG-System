@@ -52,8 +52,10 @@ documentation and version control.
 - Query search is based only on keywords. Semantics cannot be recognised by the system yet.
 - Results may not always return the most relevant chunks first.
 - UI is very basic and lacks features like history, highlighting, or source referencing.
+- Current prototype cannot handle file formats other than .txt.
 
 ## Next Steps
 - Implement semantic search using embeddings for better accuracy.
 - Add chunking strategy to improve retrieval from large documents.
 - Improve UI with chat history and better formatting.
+- Make the system capable of handling formats such as PDFs, .docx, etc.
