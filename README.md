@@ -1,4 +1,4 @@
-# Mini-RAG-System
+# Mini-RAG-System Week 1
 
 Week 1 focuses on building the foundation of a mini RAG system.
 Users can upload documents, and the system extracts and processes the text for use.
