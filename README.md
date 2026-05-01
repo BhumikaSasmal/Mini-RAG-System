@@ -34,17 +34,17 @@ documentation and version control.
 - Navigate to app.py, open the terminal, and run it using: streamlit run app.py
   
 ## Folder Structure
-mini-rag-system/
-  data/
-  notebooks/
-  src/
-    text_processing.py
-  tests/
-    app.py
-    requirements.txt
-    sample.txt
-    README.md
-    .gitignore
+- mini-rag-system/
+  - data/
+  - notebooks/
+  - src/
+    - text_processing.py
+  - tests/
+  - app.py
+  - requirements.txt
+  - sample.txt
+  - README.md
+  - .gitignore
 
 ## Known Limitations
 - Query search is based only on keywords. Semantics cannot be recognised by the system yet.
