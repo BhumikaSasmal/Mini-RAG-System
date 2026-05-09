@@ -4,10 +4,14 @@
 
 ## Known Limitations:
 - In .txt files, the system is unable to differentiate between pages and paragraphs. If a file has 10 paragraphs, it shows 10 for both paragraph and page count.
+  
 
 # Testing with a PDF file
 <img width="2876" height="1345" alt="image" src="https://github.com/user-attachments/assets/37c69f21-d0ec-4a2e-9c23-b0db61c99e55" />
 <img width="2875" height="1469" alt="image" src="https://github.com/user-attachments/assets/caa5a9b3-7ad8-4c2c-888f-3ffce43ed9a6" />
+
+## Known Limitations:
+- Tables and Messily formatted PDFs generate more inconsistent chunks.
 
 # Testing with scanned PDF file
 <img width="2871" height="1468" alt="image" src="https://github.com/user-attachments/assets/78839041-c823-4bf1-85b0-a49cadfa4aab" />
