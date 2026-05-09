@@ -11,6 +11,7 @@
 
 # Testing with scanned PDF file
 <img width="2871" height="1468" alt="image" src="https://github.com/user-attachments/assets/78839041-c823-4bf1-85b0-a49cadfa4aab" />
+
 ## Known Limitations:
 - System is unable to recognise any text in scanned PDFs, regardless of whether content is printed or handwritten.
 
