@@ -202,6 +202,8 @@ cython_debug/
 # .vscode/
 # Temporary file for partial code execution
 run_text_demo.py
+pdf_load_test.py
+txt_load_test.py
 
 # Ruff stuff:
 .ruff_cache/
