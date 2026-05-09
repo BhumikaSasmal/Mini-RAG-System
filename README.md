@@ -65,13 +65,13 @@ to every chunk, and show the results in a basic Streamlit interface.
   - manual_test_log.md
 
 ## Known Limitations
-- Query search is based only on keywords. Semantics cannot be recognised by the system yet.
-- Results may not always return the most relevant chunks first.
-- UI is very basic and lacks features like history, highlighting, or source referencing.
-- Current prototype cannot handle file formats other than .txt.
+- Content in scanned PDFs is not recognised, whether it is printed or handwritten.
+- In .txt files, the system is unable to differentiate between pages and paragraphs. If a file has 10 paragraphs, it shows 10 for both paragraph and page count.
+- Messily formatted PDFs produce more inconsistent chunks, but the text extraction is still fine.
+- UI is still very basic.
 
 ## Next Steps
-- Implement semantic search using embeddings for better accuracy.
-- Add chunking strategy to improve retrieval from large documents.
-- Improve UI with chat history and better formatting.
-- Make the system capable of handling formats such as PDFs, .docx, etc.
+- Vector database integration
+- Advanced OCR for scanned PDFs
+- Cloud deployment
+- Production-grade UI design
