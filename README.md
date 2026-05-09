@@ -1,24 +1,26 @@
-# Mini-RAG-System Week 1
+# Mini-RAG-System Week 2
 
-Week 1 focuses on building the foundation of a mini RAG system.
-Users can upload documents, and the system extracts and processes the text for use.
-Basic keyword-based search is implemented to answer user queries from the document.
+The aim is to have a working document ingestion pipeline. The system should accept simple
+text and PDF documents, extract usable text, clean the extracted content, split it into searchable chunks, and attach metadata
+to every chunk, and show the results in a basic Streamlit interface.
 
 ## Problem Statement
-Week 1 is the foundation phase of the Mini RAG System project. The objective is not to build the final AI chatbot
-yet. The objective is to ensure understanding of the project workflow, have the correct development
-setup, process basic text with Python, run a simple Streamlit interface, and maintain clean
-documentation and version control.
+- Build the foundation that will be used for embeddings and vector search in Week 3.
+- Keep the implementation simple, modular, and testable.
+- Do not focus on chatbot answers yet. Week 2 is about preparing high-quality document text for retrieval.
+- Document every design decision so the next stage is easy to continue.
 
-## Week 1 Scope
-- Set up a reproducible Python project environment using a virtual environment and requirements.txt.
-- Read, clean, and search text using Python.
-- Create a basic Streamlit app with file upload and user input fields.
-- Use Git for basic version control: status, add, commit, and repository hygiene.
-- Prepare professional documentation: README, setup notes, work log, and issue tracker.
+## Week 2 Scope
+- Read .txt and .pdf files
+- Clean and normalize extracted text
+- Create text chunks with overlap
+- Attach chunk metadata
+- Show upload and chunk preview
+- Write README and testing notes
 
 ## Tools and Libraries Used
--  Basic Python file handling
+-  Python
+-  pypdf
 -  Virtual Environment 
 -  pip
 -  VS Code
@@ -37,16 +39,30 @@ documentation and version control.
   
 ## Folder Structure
 - mini-rag-system/
-  - data/
-  - notebooks/
-  - src/
-    - text_processing.py
-  - tests/
-  - app.py
-  - requirements.txt
-  - sample.txt
-  - README.md
-  - .gitignore
+- app.py
+- requirements.txt
+- README.md
+- data/
+  - sample_docs/
+    - sample_policy.txt
+    - sample_report.pdf
+    - sample_scanned.pdf
+    - README.md
+- notebooks/
+- outputs/
+  - chunks_preview_pdf.json
+  - chunks_preview_scanned.json
+  - chunks_preview_txt.json
+- src/
+  - __init__.py
+  - document_loader.py
+  - text_cleaning.py
+  - text_processing.py
+  - chunking.py
+  - schemas.py
+  - pipeline.py
+- tests/
+  - manual_test_log.md
 
 ## Known Limitations
 - Query search is based only on keywords. Semantics cannot be recognised by the system yet.
