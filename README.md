@@ -38,7 +38,7 @@ to every chunk, and show the results in a basic Streamlit interface.
 - Navigate to app.py, open the terminal, and run it using: streamlit run app.py
   
 ## Folder Structure
-- mini-rag-system/
+mini-rag-system/
 - app.py
 - requirements.txt
 - README.md
