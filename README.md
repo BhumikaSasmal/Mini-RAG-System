@@ -60,8 +60,4 @@ documentation and version control.
 - Improve UI with chat history and better formatting.
 - Make the system capable of handling formats such as PDFs, .docx, etc.
 
-# Mini-RAG-System Week 2
 
-The aim is to have a working document ingestion pipeline. The system should accept simple
-text and PDF documents, extract usable text, clean the extracted content, split it into searchable chunks, and attach metadata
-to every chunk, and show the results in a basic Streamlit interface.
