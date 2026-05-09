@@ -11,7 +11,7 @@
 <img width="2875" height="1469" alt="image" src="https://github.com/user-attachments/assets/caa5a9b3-7ad8-4c2c-888f-3ffce43ed9a6" />
 
 ## Known Limitations:
-- Tables and Messily formatted PDFs generate more inconsistent chunks.
+- Messily formatted PDFs generate more inconsistent chunks, but the text extraction is still fine.
 
 # Testing with scanned PDF file
 <img width="2871" height="1468" alt="image" src="https://github.com/user-attachments/assets/78839041-c823-4bf1-85b0-a49cadfa4aab" />
