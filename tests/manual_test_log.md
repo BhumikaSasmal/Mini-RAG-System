@@ -3,7 +3,7 @@
 <img width="2875" height="1459" alt="image" src="https://github.com/user-attachments/assets/a78d0548-244c-4c2c-85c0-a114bbfca20f" />
 
 ## Known Limitations:
-- In .txt files, the system is unable to differentiate between pages and paragraphs. If a file has 10 paragraphs, it shows 10 for both paragraph and page count.
+- In .txt files, the system is unable to differentiate between pages and paragraphs. If a file has 10 paragraphs, it shows 10 for both paragraph and page count  => Fixed: System displays N/A for page count in .txt files.
   
 
 # Testing with a PDF file
