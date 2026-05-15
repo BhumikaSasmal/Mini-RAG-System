@@ -42,6 +42,10 @@ mini-rag-system/
 - app.py
 - requirements.txt
 - README.md
+- legacy/ #contains files from previous week that may not be relevant to week 2 updates
+  - run_text_demo.py
+  - sample.txt
+  - text_processing.py
 - data/
   - sample_docs/
     - sample_policy.txt
