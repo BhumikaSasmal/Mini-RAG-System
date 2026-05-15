@@ -20,7 +20,8 @@ def load_txt(file_path):
     records = build_document_records(
         source_file=file_path,
         file_type="txt",
-        paragraphs=paragraphs
+        text=text,
+        pages=None
     )
     
     return records
