@@ -1,7 +1,4 @@
 def create_document_schema(source_file, file_type, text, page_number=None):
-    """
-    Returns a standardized document record.
-    """
     return {
         "source_file": source_file,
         "file_type": file_type,
@@ -9,16 +6,25 @@ def create_document_schema(source_file, file_type, text, page_number=None):
         "text": text
     }
 
-def build_document_records(source_file, file_type, paragraphs):
+def build_document_records(source_file, file_type, text=None, pages=None):
+
     records = []
-    
-    for i, para in enumerate(paragraphs, start=1):
-        record = {
+
+    if file_type == "txt":
+        records.append({
             "source_file": source_file,
             "file_type": file_type,
-            "page_number": i, 
-            "text": para
-        }
-        records.append(record)
-    
+            "page_number": "N/A",
+            "text": text
+        })
+
+    else:
+        for page in pages:
+            records.append({
+                "source_file": source_file,
+                "file_type": file_type,
+                "page_number": page["page_number"],
+                "text": page["text"]
+            })
+
     return records
