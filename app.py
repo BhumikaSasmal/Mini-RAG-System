@@ -1,36 +1,54 @@
 import streamlit as st
-from src.text_processing import *
+import tempfile
+import os
+import json
+from src.pipeline import process_document
 
-st.title("Mini RAG System - Week 1 Prototype")
-st.write("Upload a text file and ask questions to find relevant parts of the document.")
+st.title("Mini RAG System - Document Inspector")
+st.write("Upload a TXT or PDF file to inspect extracted chunks.")
 
-
-uploaded_file = st.file_uploader("Upload a .txt file", type=["txt"])
+uploaded_file = st.file_uploader("Upload file", type=["txt", "pdf"])
 
 if uploaded_file is not None:
-    text = uploaded_file.read().decode("utf-8")
-    clean_text = basic_clean_text(text)
-    st.subheader("Text Preview (First 1000 characters)")
-    st.write(text[:1000])
-    stats = count_text_stats(clean_text)
-    paragraphs = split_into_paragraphs(text)
-    st.subheader("Document Statistics")
-    st.write(f"Characters: {stats['characters']}")
-    st.write(f"Words: {stats['words']}")
-    st.write(f"Sentences: {stats['sentences']}")
-    st.write(f"Paragraphs: {len(paragraphs)}")
-    query = st.text_input("Enter your question:")
-    if st.button("Search Document"):
-        if not query.strip():
-            st.error("Please enter a question.")      
-        else:
-            results = keyword_search(clean_text, query)
-            st.subheader("Results")
-            if results:
-                for i, res in enumerate(results, 1):
-                    st.write(f"{i}. {res}")
-            else:
-                st.warning("No matching paragraph found.")
-
-else:
-    st.error("Please upload a .txt file to proceed.")
+    
+    file_name = uploaded_file.name
+    file_type = file_name.split(".")[-1]
+    
+    with tempfile.NamedTemporaryFile(delete=False, suffix=f".{file_type}") as tmp:
+        tmp.write(uploaded_file.read())
+        temp_path = tmp.name
+    
+    result = process_document(temp_path)
+    
+    if isinstance(result, dict) and "error" in result:
+        st.error(result["error"])
+    else:
+        chunks = result
+        
+        total_chars = sum(c["char_count"] for c in chunks)
+        pages = set(c["page_number"] for c in chunks)
+        
+        st.subheader("File Details")
+        st.write(f"File Name: {file_name}")
+        st.write(f"File Type: {file_type}")
+        st.write(f"Total Characters: {total_chars}")
+        page_count = "N/A" if file_type == "txt" else len(pages)
+        st.write(f"Page Count: {page_count}")
+        st.write(f"Chunk Count: {len(chunks)}")
+        
+        st.subheader("Chunk Preview")
+        
+        for c in chunks[:5]:
+            with st.expander(f"{c['chunk_id']} (Page {c['page_number']})"):
+                st.write(c["text"])
+        
+        json_data = json.dumps(chunks, indent=2, ensure_ascii=False)
+        
+        st.download_button(
+            label="Download chunks_preview.json",
+            data=json_data,
+            file_name="chunks_preview.json",
+            mime="application/json"
+        )
+    
+    os.remove(temp_path)
