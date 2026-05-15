@@ -1,4 +1,4 @@
-from src.text_processing import *
+from legacy.text_processing import *
 text = read_text_file("sample.txt")
 cleaned = basic_clean_text(text)
 stats = count_text_stats(cleaned)
