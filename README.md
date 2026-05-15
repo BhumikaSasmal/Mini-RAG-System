@@ -66,7 +66,7 @@ mini-rag-system/
 
 ## Known Limitations
 - Content in scanned PDFs is not recognised, whether it is printed or handwritten.
-- In .txt files, the system is unable to differentiate between pages and paragraphs. If a file has 10 paragraphs, it shows 10 for both paragraph and page count.
+- In .txt files, the system is unable to differentiate between pages and paragraphs. If a file has 10 paragraphs, it shows 10 for both paragraph and page count => Fixed: System displays N/A for page count in .txt files.
 - Messily formatted PDFs produce more inconsistent chunks, but the text extraction is still fine.
 - UI is still very basic.
 
