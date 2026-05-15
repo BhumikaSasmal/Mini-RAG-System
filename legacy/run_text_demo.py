@@ -1,0 +1,15 @@
+from src.text_processing import *
+text = read_text_file("sample.txt")
+cleaned = basic_clean_text(text)
+stats = count_text_stats(cleaned)
+paras = split_into_paragraphs(cleaned)
+matches1 = keyword_search(cleaned, "networks")
+matches2 = keyword_search(cleaned, "neural networks")
+matches3 = keyword_search(cleaned, "layer")
+
+print("Cleaned Text:\n", cleaned)
+print("\nStats:\n", stats)
+print("\nParagraphs:\n", paras)
+print("\nKeyword Matches1:\n", matches1)
+print("\nKeyword Matches2:\n", matches2)
+print("\nKeyword Matches3:\n", matches3)
