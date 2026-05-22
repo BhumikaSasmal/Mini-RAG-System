@@ -204,6 +204,8 @@ cython_debug/
 run_text_demo.py
 pdf_load_test.py
 txt_load_test.py
+vector_store/
+.env
 
 # Ruff stuff:
 .ruff_cache/
