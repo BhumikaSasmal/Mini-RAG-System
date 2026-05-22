@@ -1,16 +1,25 @@
-import re
+def clean_text(records):
+    cleaned = []
 
-def clean_text(text):
-    if not text:
-        return ""
-    
-    text = text.replace("\r\n", "\n")
-    text = re.sub(r'\n\s*\n+', '\n\n', text)
-    text = re.sub(r'[ \t]+', ' ', text)
-    
-    lines = text.split("\n")
-    cleaned_lines = [line.strip() for line in lines]
-    
-    text = "\n".join(cleaned_lines)
-    
-    return text.strip()
+    for record in records:
+        text = record.get("text", "")
+
+        if isinstance(text, list):
+            text = " ".join([str(t) for t in text])
+
+        if not isinstance(text, str):
+            continue
+
+        text = text.strip()
+
+        if len(text) == 0:
+            continue
+
+        cleaned.append({
+            "text": text,
+            "page_number": record.get("page_number", 1),
+            "source_file": record.get("source_file", "unknown"),
+            "file_type": record.get("file_type", "unknown")
+        })
+
+    return cleaned
