@@ -64,10 +64,22 @@ mini-rag-system/
   - retrieval_test.py
 - tests/
   - week3_manual_test_log.md
+ 
+## Embedding Strategy
+Option A: Local Sentence Transformers
+
+### Pros:
+- No API key is required.
+- No usage cost.
+- Good for learning, works offline after model download, easy to test.
+
+### Limitations:
+- The first model download can be slow.
+- Performance depends on the local machine.
 
 ## Known Limitations
-- Chunks generated may not be very consistent
-- The results for queries may not be very accurate
+- Chunks generated may not be very consistent.
+- The results for queries may not be very accurate.
 - The Streamlit app is taking a long time to load when first opened.
 
 ## Next Steps
