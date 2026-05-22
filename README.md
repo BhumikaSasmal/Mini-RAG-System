@@ -47,7 +47,9 @@ mini-rag-system/
     - README.md
 - notebooks/
 - outputs/
-  - chunks_preview.json
+  - chunks_preview_txt.json
+  - chunks_preview_pdf.json
+  - chunks_preview_scanned.json
   - retrieval_test_results.md
 - src/
   - __init__.py
