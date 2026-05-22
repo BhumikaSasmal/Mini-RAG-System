@@ -66,6 +66,7 @@ mini-rag-system/
 ## Known Limitations
 - Chunks generated may not be very consistent
 - The results for queries may not be very accurate
+- The Streamlit app is taking a long time to load when first opened.
 
 ## Next Steps
 - Advanced OCR for scanned PDFs
