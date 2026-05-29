@@ -1,88 +1,238 @@
 # Mini-RAG-System Week 3
 
-The aim of week 3 is to convert document chunks into embeddings and store them in a persistent vector database.
+The aim of Week 3 is to convert document chunks into embeddings and store them in a persistent vector database.
 
 ## Week 3 Scope
 - Raw document text that can be cleaned and chunked before indexing
 - Reduces noise before embeddings are generated
 - Controls the size and quality of text units sent to the embedding model
 - Allows search results to show source file, page number, chunk index, and other context
-- Streamlit upload/preview flow will be extended to include indexing status and test retrieval
-- README and work log started. Will be updated with embedding choices, setup steps, and test results
+- Streamlit upload/preview flow extended to include indexing status and semantic search
+- Retrieval testing added for evaluating search quality
+- README and work log updated with embedding choices, setup steps, and retrieval testing
+
+---
 
 ## Tools and Libraries Used
--  Python
--  fitz
--  Chroma DB
--  Sentence Transformer
--  Virtual Environment 
--  pip
--  VS Code
--  Streamlit
--  Git and GitHub
+- Python
+- PyMuPDF (`fitz`)
+- Chroma DB
+- Sentence Transformers
+- Virtual Environment
+- pip
+- VS Code
+- Streamlit
+- Git and GitHub
+
+---
 
 ## Setup Instructions
-- Install Python 3.10 or above and verify with: python --version.
-- Install Visual Studio Code and add the Python extension.
-- Create a Python virtual environment using: python -m venv venv.
-- Activate the environment. On Windows, use: venv/Scripts/activate. On Mac/Linux use: source venv/bin/activate.
-- Install initial packages: pip install streamlit pandas numpy python-dotenv.
 
-## Streamlit App 
-- Navigate to app.py, open the terminal, and run it using: streamlit run app.py
-  
+1. Create and activate a virtual environment.
+
+2. Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+3. Run the Streamlit app:
+
+```bash
+streamlit run app.py
+```
+
+4. Upload either:
+- `sample_policy.txt`
+- `sample_report.pdf`
+
+5. Click:
+
+```text
+Build / Rebuild Vector Index
+```
+
+6. Run semantic search queries from the UI.
+
+---
+
+## How to Test Week 3
+
+1. Launch the Streamlit application.
+
+2. Upload a TXT or PDF document.
+
+3. Verify:
+- chunk preview
+- metadata
+- page handling
+- JSON export
+
+4. Build the vector index using the indexing button.
+
+5. Run semantic search queries such as:
+- "What is the purpose of a sample policy?"
+- "Why is communication important?"
+- "What are the review requirements?"
+
+6. Run retrieval evaluation manually:
+
+```bash
+python src/retrieval_test.py
+```
+
+7. Check generated results:
+
+```text
+outputs/retrieval_test_results.md
+```
+
+---
+
 ## Folder Structure
+
+```text
 mini-rag-system/
-- app.py
-- requirements.txt
-- README.md
-- legacy/ #contains files from previous week that may not be relevant to week 2 updates
-  - run_text_demo.py
-  - sample.txt
-- data/
-  - sample_docs/
-    - sample_policy.txt
-    - sample_report.pdf
-    - sample_scanned.pdf
-    - README.md
-- notebooks/
-- outputs/
-  - chunks_preview_txt.json
-  - chunks_preview_pdf.json
-  - chunks_preview_scanned.json
-  - retrieval_test_results.md
-- src/
-  - __init__.py
-  - document_loader.py
-  - text_cleaning.py
-  - chunking.py
-  - schemas.py
-  - config.py
-  - embedding_service.py
-  - vector_store.py
-  - index_chunks.py
-  - retrieval_test.py
-- tests/
-  - week3_manual_test_log.md
- 
+├── app.py
+├── requirements.txt
+├── README.md
+├── legacy/
+│   ├── run_text_demo.py
+│   └── sample.txt
+├── data/
+│   └── sample_docs/
+│       ├── sample_policy.txt
+│       ├── sample_report.pdf
+│       ├── sample_scanned.pdf
+│       └── README.md
+├── notebooks/
+├── outputs/
+│   ├── chunks_preview_txt.json
+│   ├── chunks_preview_pdf.json
+│   ├── chunks_preview_scanned.json
+│   └── retrieval_test_results.md
+├── src/
+│   ├── __init__.py
+│   ├── document_loader.py
+│   ├── text_cleaning.py
+│   ├── chunking.py
+│   ├── schemas.py
+│   ├── config.py
+│   ├── embedding_service.py
+│   ├── vector_store.py
+│   ├── index_chunks.py
+│   └── retrieval_test.py
+└── tests/
+    └── week3_manual_test_log.md
+```
+
+---
+
 ## Embedding Strategy
-Option A: Local Sentence Transformers
 
-### Pros:
-- No API key is required.
-- No usage cost.
-- Good for learning, works offline after model download, easy to test.
+### Local Sentence Transformers
 
-### Limitations:
-- The first model download can be slow.
-- Performance depends on the local machine.
+Model used:
+
+```text
+all-MiniLM-L6-v2
+```
+
+### Pros
+- No API key required
+- No usage cost
+- Works offline after initial model download
+- Easy to test locally
+
+### Limitations
+- First model load can be slow
+- Performance depends on local hardware
+- Retrieval quality is still basic and depends heavily on chunking quality
+
+---
+
+## Chunk Metadata
+
+Each chunk stores metadata used during retrieval and debugging.
+
+### `chunk_id`
+
+Example:
+
+```text
+sample_report.pdf_p3_c12
+```
+
+Meaning:
+- `sample_report.pdf` → source file
+- `p3` → page number
+- `c12` → global chunk number
+
+### `chunk_index`
+
+Represents the local chunk position within a page or document section.
+
+Example:
+- `0`
+- `1`
+- `2`
+
+---
+
+## Vector Index Behavior
+
+The current indexing flow rebuilds the Chroma collection during indexing.
+
+This means:
+- Existing indexed chunks are removed
+- Only the latest indexed dataset remains available
+
+This behavior is intentional for Week 3 testing and debugging.
+
+Future versions may support:
+- incremental indexing
+- multi-document persistence
+- append-only indexing
+
+---
+
+## Current Limitations and Planned Fixes
+
+| Current Limitation | Planned Improvement |
+|---|---|
+| Retrieval quality is still basic | Improve chunking and ranking |
+| Chunk overlap is simple word overlap | Sentence-aware chunking improvements |
+| Only local embeddings are supported | Add optional cloud embedding APIs |
+| Scanned PDFs are not processed correctly | Add OCR pipeline later |
+| Rebuilding index removes previous data | Add incremental indexing |
+| Initial model loading is slow | Add Streamlit caching and optimization |
+
+---
+
+## OCR and Scanned PDF Note
+
+The current implementation works only with machine-readable PDFs.
+
+Scanned PDFs require OCR (Optical Character Recognition), which is currently out of scope unless added in a future version.
+
+Example:
+- `sample_report.pdf` → supported
+- `sample_scanned.pdf` → not fully supported yet
+
+---
 
 ## Known Limitations
-- Chunks generated may not be very consistent.
-- The results for queries may not be very accurate.
-- The Streamlit app is taking a long time to load when first opened.
+- Retrieval results are not always highly accurate
+- Semantic similarity ranking is still basic
+- Chunk sizes may vary depending on document structure
+- Initial embedding/model load may take time
+
+---
 
 ## Next Steps
-- Advanced OCR for scanned PDFs
+- OCR support for scanned PDFs
+- Better chunk ranking
+- Hybrid retrieval approaches
 - Cloud deployment
-- Production-grade UI design
+- Production-grade UI improvements
+- Multi-document indexing
