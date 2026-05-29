@@ -196,6 +196,18 @@ Future versions may support:
 
 ---
 
+
+
+## OCR and Scanned PDF Note
+
+The current implementation works only with machine-readable PDFs.
+
+Scanned PDFs require OCR (Optical Character Recognition), which is currently out of scope unless added in a future version.
+
+Example:
+- `sample_report.pdf` → supported
+- `sample_scanned.pdf` → not fully supported yet
+
 ## Current Limitations and Planned Fixes
 
 | Current Limitation | Planned Improvement |
@@ -208,31 +220,3 @@ Future versions may support:
 | Initial model loading is slow | Add Streamlit caching and optimization |
 
 ---
-
-## OCR and Scanned PDF Note
-
-The current implementation works only with machine-readable PDFs.
-
-Scanned PDFs require OCR (Optical Character Recognition), which is currently out of scope unless added in a future version.
-
-Example:
-- `sample_report.pdf` → supported
-- `sample_scanned.pdf` → not fully supported yet
-
----
-
-## Known Limitations
-- Retrieval results are not always highly accurate
-- Semantic similarity ranking is still basic
-- Chunk sizes may vary depending on document structure
-- Initial embedding/model load may take time
-
----
-
-## Next Steps
-- OCR support for scanned PDFs
-- Better chunk ranking
-- Hybrid retrieval approaches
-- Cloud deployment
-- Production-grade UI improvements
-- Multi-document indexing
