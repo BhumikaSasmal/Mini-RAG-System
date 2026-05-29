@@ -2,24 +2,35 @@ def clean_text(records):
     cleaned = []
 
     for record in records:
+        if not isinstance(record, dict):
+            continue
+
         text = record.get("text", "")
 
         if isinstance(text, list):
-            text = " ".join([str(t) for t in text])
+            text = " ".join(str(t) for t in text)
 
         if not isinstance(text, str):
             continue
 
         text = text.strip()
 
-        if len(text) == 0:
+        if not text:
             continue
 
+        paragraphs = []
+
+        for paragraph in text.split("\n"):
+            paragraph = " ".join(paragraph.split())
+
+            if paragraph:
+                paragraphs.append(paragraph)
+
+        text = "\n\n".join(paragraphs)
+
         cleaned.append({
-            "text": text,
-            "page_number": record.get("page_number", 1),
-            "source_file": record.get("source_file", "unknown"),
-            "file_type": record.get("file_type", "unknown")
+            **record,
+            "text": text
         })
 
     return cleaned
