@@ -1,23 +1,50 @@
-# Testing with .txt file
-<img width="2873" height="1323" alt="image" src="https://github.com/user-attachments/assets/b358f3d3-d2e7-4b23-9897-679763062da5" />
-<img width="2875" height="1459" alt="image" src="https://github.com/user-attachments/assets/a78d0548-244c-4c2c-85c0-a114bbfca20f" />
+# Manual Test Log
 
-## Known Limitations:
-- In .txt files, the system is unable to differentiate between pages and paragraphs. If a file has 10 paragraphs, it shows 10 for both paragraph and page count  => Fixed: System displays N/A for page count in .txt files.
-  
+## Test Summary
 
-# Testing with a PDF file
-<img width="2876" height="1345" alt="image" src="https://github.com/user-attachments/assets/37c69f21-d0ec-4a2e-9c23-b0db61c99e55" />
-<img width="2875" height="1469" alt="image" src="https://github.com/user-attachments/assets/caa5a9b3-7ad8-4c2c-888f-3ffce43ed9a6" />
+| Test Case | Input File | Expected Result | Actual Result | Status |
+|---|---|---|---|---|
+| Upload TXT File | sample_policy.txt | TXT file processed successfully with page count shown as N/A | Chunks generated successfully and page count displayed as N/A | Pass |
+| TXT Chunk Preview | sample_policy.txt | Chunk preview displayed without page labels | Expandable chunk preview displayed correctly | Pass |
+| Upload PDF File | sample_report.pdf | PDF processed page-wise with correct page numbers | Chunks generated with correct page metadata | Pass |
+| PDF Chunk Preview | sample_report.pdf | Chunk preview should display page numbers | Page numbers displayed correctly in preview | Pass |
+| Upload Scanned PDF | sample_scanned.pdf | Text extraction should fail because OCR is not implemented | No readable text extracted from scanned PDF | Out of Scope |
+| Build Vector Index | sample_policy.txt | Chunks embedded and indexed successfully | Vector index created successfully | Pass |
+| Semantic Search | sample_policy.txt | Relevant chunks retrieved for query | Relevant chunks retrieved but ranking quality still basic | Partial Pass |
 
-## Known Limitations:
-- Messily formatted PDFs generate more inconsistent chunks, but the text extraction is still fine.
+---
 
-# Testing with scanned PDF file
-<img width="2871" height="1468" alt="image" src="https://github.com/user-attachments/assets/78839041-c823-4bf1-85b0-a49cadfa4aab" />
+## Semantic Retrieval Test Cases
 
-## Known Limitations:
-- System is unable to recognise any text in scanned PDFs, regardless of whether the content is printed or handwritten.
+| Query | Expected Match | Actual Result | Status |
+|---|---|---|---|
+| What is the purpose of a sample policy? | Purpose/introduction section | Retrieved partially relevant section | Partial Pass |
+| Why is communication important in a policy? | Communication-related section | Relevant chunk retrieved | Pass |
+| What are the review and update requirements? | Review/update section | Retrieved nearby but not exact section | Partial Pass |
 
+---
 
+## Known Limitations
 
+| Limitation | Notes |
+|---|---|
+| Retrieval quality is still basic | Results are sometimes only partially relevant |
+| Messy PDFs create inconsistent chunks | Extraction works but chunk quality varies |
+| Scanned PDFs are unsupported | OCR is not implemented yet |
+| Initial model loading is slow | First embedding load takes time |
+
+---
+
+## OCR Note
+
+Scanned PDFs are currently out of scope unless OCR support is added later.
+
+---
+
+## Screenshot Notes
+
+Screenshots can optionally be stored locally inside:
+
+```text
+outputs/screenshots/
+```
