@@ -101,6 +101,7 @@ mini-rag-system/
 │ ├── sample_policy.txt
 │ ├── sample_report.pdf
 │ └── sample_scanned.pdf
+| └── README.md
 ├── outputs/
 │ ├── chunks_preview_txt.json
 │ ├── chunks_preview_pdf.json
