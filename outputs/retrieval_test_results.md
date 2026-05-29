@@ -1,5 +1,5 @@
 # Retrieval Test Results
-
+NOTE: -1 Page number here refers to None. It has been set to -1 to ensure ChromaDB can work safely.
 ## Query
 
 What is the purpose of a sample policy?
