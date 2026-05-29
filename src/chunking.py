@@ -1,7 +1,10 @@
 import json
 import os
 import re
-
+from src.config import (
+    CHUNK_SIZE,
+    CHUNK_OVERLAP
+)
 
 def normalize_text(text):
     text = re.sub(r"\s+", " ", text)
@@ -9,7 +12,7 @@ def normalize_text(text):
     return text.strip()
 
 
-def split_text(text, chunk_size=120, overlap=30):
+def split_text(text, chunk_size=CHUNK_SIZE, overlap=CHUNK_OVERLAP):
     words = text.split()
 
     if not words:
@@ -18,8 +21,21 @@ def split_text(text, chunk_size=120, overlap=30):
     chunks = []
     start = 0
 
+    sentence_endings = {".", "!", "?", ".\"", "!\"", "?\""}
+
     while start < len(words):
-        end = start + chunk_size
+        end = min(start + chunk_size, len(words))
+
+        if end < len(words):
+            extended_end = min(end + 20, len(words))
+
+            for i in range(end, extended_end):
+                word = words[i].strip()
+
+                if any(word.endswith(se) for se in sentence_endings):
+                    end = i + 1
+                    break
+
         chunk_words = words[start:end]
 
         chunk_text = " ".join(chunk_words).strip()
@@ -32,7 +48,7 @@ def split_text(text, chunk_size=120, overlap=30):
     return chunks
 
 
-def create_chunks(records, chunk_size=120, overlap=30):
+def create_chunks(records, chunk_size=CHUNK_SIZE, overlap=CHUNK_OVERLAP):
     chunks = []
     global_index = 0
 
@@ -61,7 +77,7 @@ def create_chunks(records, chunk_size=120, overlap=30):
         )
 
         file_type = record.get("file_type", "unknown")
-        page_number = record.get("page_number", 1)
+        page_number = record.get("page_number")
 
         text_chunks = split_text(
             text,
