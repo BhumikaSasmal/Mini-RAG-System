@@ -41,10 +41,4 @@ Scanned PDFs are currently out of scope unless OCR support is added later.
 
 ---
 
-## Screenshot Notes
 
-Screenshots can optionally be stored locally inside:
-
-```text
-outputs/screenshots/
-```
