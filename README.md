@@ -153,7 +153,7 @@ all-MiniLM-L6-v2
 
 Each chunk stores metadata used during retrieval and debugging.
 
-### `chunk_id`
+### chunk_id
 
 Example:
 
@@ -166,7 +166,7 @@ Meaning:
 - `p3` → page number
 - `c12` → global chunk number
 
-### `chunk_index`
+### chunk_index
 
 Represents the local chunk position within a page or document section.
 
@@ -203,8 +203,8 @@ The current implementation works only with machine-readable PDFs.
 Scanned PDFs require OCR (Optical Character Recognition), which is currently out of scope unless added in a future version.
 
 Example:
-- `sample_report.pdf` → supported
-- `sample_scanned.pdf` → not fully supported yet
+- sample_report.pdf → supported
+- sample_scanned.pdf → not supported yet
 
 ## Current Limitations and Planned Fixes
 
