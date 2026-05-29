@@ -94,36 +94,33 @@ outputs/retrieval_test_results.md
 ```text
 mini-rag-system/
 ├── app.py
-├── requirements.txt
 ├── README.md
-├── legacy/
-│   ├── run_text_demo.py
-│   └── sample.txt
+├── requirements.txt
 ├── data/
-│   └── sample_docs/
-│       ├── sample_policy.txt
-│       ├── sample_report.pdf
-│       ├── sample_scanned.pdf
-│       └── README.md
-├── notebooks/
+│ └── sample_docs/
+│ ├── sample_policy.txt
+│ ├── sample_report.pdf
+│ └── sample_scanned.pdf
 ├── outputs/
-│   ├── chunks_preview_txt.json
-│   ├── chunks_preview_pdf.json
-│   ├── chunks_preview_scanned.json
-│   └── retrieval_test_results.md
+│ ├── chunks_preview_txt.json
+│ ├── chunks_preview_pdf.json
+│ └── retrieval_test_results.md
 ├── src/
-│   ├── __init__.py
-│   ├── document_loader.py
-│   ├── text_cleaning.py
-│   ├── chunking.py
-│   ├── schemas.py
-│   ├── config.py
-│   ├── embedding_service.py
-│   ├── vector_store.py
-│   ├── index_chunks.py
-│   └── retrieval_test.py
-└── tests/
-    └── week3_manual_test_log.md
+│ ├── __init__.py
+│ ├── config.py
+│ ├── document_loader.py
+│ ├── text_cleaning.py
+│ ├── chunking.py
+│ ├── embedding_service.py
+│ ├── vector_store.py
+│ ├── index_chunks.py
+│ └── pipeline.py
+├── tests/
+│ ├── manual_test_log.md
+│ └── week3_manual_test_log.md
+└── legacy/
+  ├── text_processing.py
+  └── run_text_demo.py
 ```
 
 ---
