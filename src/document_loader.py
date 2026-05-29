@@ -7,21 +7,14 @@ def normalize_text(text):
     cleaned_lines = []
 
     for line in lines:
-        line = line.strip()
-
-        if not line:
-            continue
+        line = line.rstrip()
 
         cleaned_lines.append(line)
 
-    text = " ".join(cleaned_lines)
-
-    text = " ".join(text.split())
-
-    return text.strip()
+    return "\n".join(cleaned_lines).strip()
 
 
-def load_txt(file_path):
+def load_txt(file_path, source_name=None):
     try:
         with open(file_path, "r", encoding="utf-8") as f:
             text = f.read()
@@ -30,16 +23,16 @@ def load_txt(file_path):
 
         return [{
             "text": text,
-            "page_number": 1,
-            "source_file": file_path,
+            "page_number": None,
+            "source_file": source_name or file_path,
             "file_type": "txt"
         }]
 
-    except Exception as e:
-        return {"error": str(e)}
+    except Exception:
+        return []
 
 
-def load_pdf(file_path):
+def load_pdf(file_path, source_name=None):
     try:
         doc = fitz.open(file_path)
 
@@ -50,17 +43,17 @@ def load_pdf(file_path):
 
             text = normalize_text(text)
 
-            if not text:
+            if not text.strip():
                 continue
 
             records.append({
                 "text": text,
                 "page_number": i + 1,
-                "source_file": file_path,
+                "source_file": source_name or file_path,
                 "file_type": "pdf"
             })
 
         return records
 
-    except Exception as e:
-        return {"error": str(e)}
+    except Exception:
+        return []
