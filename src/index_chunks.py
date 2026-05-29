@@ -1,48 +1,52 @@
-from src.chunking import process_chunks
 from src.embedding_service import EmbeddingService
 from src.vector_store import VectorStore
-import fitz  
+from src.config import (
+    COLLECTION_NAME,
+    PERSIST_DIR
+)
 
-def load_file(file_path):
-    records = []
-    doc = fitz.open(file_path)
 
-    for i, page in enumerate(doc):
-        text = page.get_text()
+def run_indexing(chunks):
 
-        if text.strip():
-            records.append({
-                "text": text,
-                "source_file": file_path,
-                "file_type": "pdf",
-                "page_number": i + 1
-            })
+    if not chunks:
+        return 0
 
-    return records
+    valid_chunks = []
 
-def run_indexing(records):
-    chunks, _ = process_chunks(records)
+    for chunk in chunks:
+
+        if not isinstance(chunk, dict):
+            continue
+
+        text = chunk.get("text", "").strip()
+
+        if not text:
+            continue
+
+        valid_chunks.append(chunk)
+
+    if not valid_chunks:
+        return 0
 
     embedder = EmbeddingService()
-    texts = [c["text"] for c in chunks]
+
+    texts = [
+        chunk["text"]
+        for chunk in valid_chunks
+    ]
+
     embeddings = embedder.embed_texts(texts)
 
-    for c, e in zip(chunks, embeddings):
-        c["embedding"] = e
+    for chunk, embedding in zip(valid_chunks, embeddings):
+        chunk["embedding"] = embedding
 
     store = VectorStore(
-        collection_name="documents",
-        persist_dir="vector_store/chroma"
+        collection_name=COLLECTION_NAME,
+        persist_dir=PERSIST_DIR
     )
 
     store.reset_collection()
-    store.add_chunks(chunks)
 
-    print("Indexed chunks:", store.count())
+    store.add_chunks(valid_chunks)
 
-
-if __name__ == "__main__":
-    records1= load_file("data/sample_docs/sample_policy.txt")
-    run_indexing(records1)
-    records2= load_file("data/sample_docs/sample_report.pdf")
-    run_indexing(records2)
+    return store.count()
