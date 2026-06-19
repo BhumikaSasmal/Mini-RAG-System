@@ -104,8 +104,13 @@ def run_retrieval_test():
                 f"- Source File: {metadata.get('source_file')}\n"
             )
 
+            page_value = metadata.get("page_number")
+
+            if page_value in (-1, None):
+                page_value = "N/A"
+
             markdown_lines.append(
-                f"- Page Number: {metadata.get('page_number')}\n"
+                f"- Page Number: {page_value}\n"
             )
 
             markdown_lines.append(
