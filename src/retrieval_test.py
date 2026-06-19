@@ -1,6 +1,6 @@
 import os
-from vector_store import VectorStore
-from embedding_service import EmbeddingService
+from src.vector_store import VectorStore
+from src.embedding_service import EmbeddingService
 
 
 def run_retrieval_test():
