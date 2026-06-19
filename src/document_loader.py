@@ -28,9 +28,15 @@ def load_txt(file_path, source_name=None):
             "file_type": "txt"
         }]
 
-    except Exception:
-        return []
+    except UnicodeDecodeError:
+        return [{
+            "error": "Encoding issue: unable to decode TXT file."
+        }]
 
+    except Exception as e:
+        return [{
+            "error": f"Failed to read TXT file: {str(e)}"
+        }]
 
 def load_pdf(file_path, source_name=None):
     try:
@@ -52,8 +58,17 @@ def load_pdf(file_path, source_name=None):
                 "source_file": source_name or file_path,
                 "file_type": "pdf"
             })
+        if not records:
+            return [{
+                "error": (
+                    "PDF contains no extractable text. "
+                    "It may be a scanned PDF requiring OCR."
+                )
+            }]
 
         return records
 
-    except Exception:
-        return []
+    except Exception as e:
+        return [{
+            "error": f"Unreadable PDF: {str(e)}"
+        }]
