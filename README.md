@@ -166,6 +166,11 @@ Meaning:
 - `p3` → page number
 - `c12` → global chunk number
 
+NOTE: page number metadata is only applicable for PDF files. For .txt files, there is no page number in chunk_id.
+```text
+sample_policy.txt_c3
+```
+
 ### chunk_index
 
 Represents the local chunk position within a page or document section.
