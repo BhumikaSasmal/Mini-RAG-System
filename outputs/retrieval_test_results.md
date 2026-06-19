@@ -1,5 +1,5 @@
 # Retrieval Test Results
-NOTE: -1 Page number here refers to None and is valid only for .txt files. It has been set to -1 to ensure ChromaDB can work safely.
+
 ## Query
 
 What is the purpose of a sample policy?
@@ -14,7 +14,7 @@ Purpose or introduction section
 
 - Source File: sample_policy.txt
 
-- Page Number: -1
+- Page Number: N/A
 
 - Chunk Index: 0
 
@@ -31,7 +31,7 @@ Purpose or introduction section
 
 - Source File: sample_policy.txt
 
-- Page Number: -1
+- Page Number: N/A
 
 - Chunk Index: 3
 
@@ -48,7 +48,7 @@ are necessary to keep a sample policy relevant over time. As organizations evolv
 
 - Source File: sample_policy.txt
 
-- Page Number: -1
+- Page Number: N/A
 
 - Chunk Index: 1
 
@@ -77,7 +77,7 @@ Communication responsibilities section
 
 - Source File: sample_policy.txt
 
-- Page Number: -1
+- Page Number: N/A
 
 - Chunk Index: 3
 
@@ -94,7 +94,7 @@ are necessary to keep a sample policy relevant over time. As organizations evolv
 
 - Source File: sample_policy.txt
 
-- Page Number: -1
+- Page Number: N/A
 
 - Chunk Index: 0
 
@@ -111,7 +111,7 @@ are necessary to keep a sample policy relevant over time. As organizations evolv
 
 - Source File: sample_policy.txt
 
-- Page Number: -1
+- Page Number: N/A
 
 - Chunk Index: 1
 
@@ -140,7 +140,7 @@ Definitions or terminology section
 
 - Source File: sample_policy.txt
 
-- Page Number: -1
+- Page Number: N/A
 
 - Chunk Index: 1
 
@@ -157,7 +157,7 @@ clear statement of its objective and scope. The objective explains why the polic
 
 - Source File: sample_policy.txt
 
-- Page Number: -1
+- Page Number: N/A
 
 - Chunk Index: 0
 
@@ -174,7 +174,7 @@ clear statement of its objective and scope. The objective explains why the polic
 
 - Source File: sample_policy.txt
 
-- Page Number: -1
+- Page Number: N/A
 
 - Chunk Index: 2
 
@@ -203,7 +203,7 @@ Review or maintenance section
 
 - Source File: sample_policy.txt
 
-- Page Number: -1
+- Page Number: N/A
 
 - Chunk Index: 2
 
@@ -220,7 +220,7 @@ carry out their tasks in alignment with the policy’s objectives. Clear impleme
 
 - Source File: sample_policy.txt
 
-- Page Number: -1
+- Page Number: N/A
 
 - Chunk Index: 3
 
@@ -237,7 +237,7 @@ are necessary to keep a sample policy relevant over time. As organizations evolv
 
 - Source File: sample_policy.txt
 
-- Page Number: -1
+- Page Number: N/A
 
 - Chunk Index: 1
 
@@ -266,7 +266,7 @@ Roles or enforcement section
 
 - Source File: sample_policy.txt
 
-- Page Number: -1
+- Page Number: N/A
 
 - Chunk Index: 2
 
@@ -283,7 +283,7 @@ carry out their tasks in alignment with the policy’s objectives. Clear impleme
 
 - Source File: sample_policy.txt
 
-- Page Number: -1
+- Page Number: N/A
 
 - Chunk Index: 1
 
@@ -300,7 +300,7 @@ clear statement of its objective and scope. The objective explains why the polic
 
 - Source File: sample_policy.txt
 
-- Page Number: -1
+- Page Number: N/A
 
 - Chunk Index: 3
 
@@ -329,7 +329,7 @@ General overview content
 
 - Source File: sample_policy.txt
 
-- Page Number: -1
+- Page Number: N/A
 
 - Chunk Index: 0
 
@@ -346,7 +346,7 @@ General overview content
 
 - Source File: sample_policy.txt
 
-- Page Number: -1
+- Page Number: N/A
 
 - Chunk Index: 1
 
@@ -363,7 +363,7 @@ clear statement of its objective and scope. The objective explains why the polic
 
 - Source File: sample_policy.txt
 
-- Page Number: -1
+- Page Number: N/A
 
 - Chunk Index: 3
 
