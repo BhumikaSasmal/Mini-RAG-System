@@ -180,8 +180,3 @@ NOT EXECUTED
 
 
 
-
-### Usability
-PASS
-
-The upload → index → question → answer workflow could be demonstrated without additional explanation.
