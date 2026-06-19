@@ -60,7 +60,6 @@ class VectorStore:
             if page_number == "N/A":
                 page_number = None
 
-            page_number = chunk.get("page_number")
 
             metadata = {
                 "source_file": str(chunk.get("source_file", "")),
