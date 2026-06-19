@@ -86,7 +86,12 @@ def create_chunks(records, chunk_size=CHUNK_SIZE, overlap=CHUNK_OVERLAP):
         )
 
         for chunk_index, chunk_text in enumerate(text_chunks):
-            chunk_id = f"{source_file}_p{page_number}_c{global_index}"
+
+            if page_number is None:
+                chunk_id = f"{source_file}_c{global_index}"
+            else:
+                chunk_id = f"{source_file}_p{page_number}_c{global_index}"
+
 
             chunks.append({
                 "chunk_id": chunk_id,
