@@ -167,6 +167,9 @@ Meaning:
 - `c12` → global chunk number
 
 NOTE: page number metadata is only applicable for PDF files. For .txt files, there is no page number in chunk_id.
+
+Example:
+
 ```text
 sample_policy.txt_c3
 ```
