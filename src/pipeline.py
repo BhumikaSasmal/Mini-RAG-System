@@ -34,6 +34,15 @@ def process_document(file_path, source_name=None):
         return [], {
             "error": "Document loading failed"
         }
+    
+    if (
+        raw_records
+        and isinstance(raw_records[0], dict)
+        and "error" in raw_records[0]
+    ):
+        return [], {
+            "error": raw_records[0]["error"]
+        }
 
     if not raw_records:
         return [], {
