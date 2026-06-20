@@ -1,16 +1,15 @@
-# Mini-RAG-System Week 3
+# Mini-RAG-System Week 4
 
-The aim of Week 3 is to convert document chunks into embeddings and store them in a persistent vector database.
+The purpose of week 4 is to build on the existing Week 3 implementation by connecting semantic retrieval with answer generation, source display, and a clean user-facing question-answering flow.
 
-## Week 3 Scope
-- Raw document text that can be cleaned and chunked before indexing
-- Reduces noise before embeddings are generated
-- Controls the size and quality of text units sent to the embedding model
-- Allows search results to show source file, page number, chunk index, and other context
-- Streamlit upload/preview flow extended to include indexing status and semantic search
-- Retrieval testing added for evaluating search quality
-- README and work log updated with embedding choices, setup steps, and retrieval testing
-
+## Week 4 Scope
+- Connect semantic retrieval output with an answer-generation layer.
+- Prepare a structured prompt using retrieved chunks as context.
+- Add an LLM service or approved mock response service for answer generation.
+- Display answers with supporting source details such as file name, page number, and chunk identifier.
+- Improve the Streamlit flow so uploaded documents can be queried in a clear chat-style or question-answer format.
+- Create a manual test log covering retrieval, answer quality, source display, and edge cases.
+- Update README with Week 4 setup, workflow, completed scope, limitations, and next steps.
 ---
 
 ## Tools and Libraries Used
@@ -75,13 +74,20 @@ Build / Rebuild Vector Index
 - "Why is communication important?"
 - "What are the review requirements?"
 
-6. Run retrieval evaluation manually:
+6. Verify:
+Answer generation
+Source attribution
+Metadata display
+Retrieved context preview
+Insufficient-context handling
+
+7. Run retrieval evaluation manually:
 
 ```bash
 python src/retrieval_test.py
 ```
 
-7. Check generated results:
+8. Check generated results:
 
 ```text
 outputs/retrieval_test_results.md
@@ -105,6 +111,7 @@ mini-rag-system/
 ├── outputs/
 │ ├── chunks_preview_txt.json
 │ ├── chunks_preview_pdf.json
+│ ├── week4_sample_outputs.md
 │ └── retrieval_test_results.md
 ├── src/
 │ ├── __init__.py
@@ -115,12 +122,16 @@ mini-rag-system/
 │ ├── embedding_service.py
 │ ├── vector_store.py
 │ ├── index_chunks.py
+│ ├── llm_service.py
+│ ├── rag_pipeline.py
 │ └── pipeline.py
 ├── tests/
 │ ├── manual_test_log.md
 │ └── week3_manual_test_log.md
+│ └── week4_manual_test_log.md
 └── legacy/
   ├── text_processing.py
+  ├── sample.txt
   └── run_text_demo.py
 ```
 
@@ -185,20 +196,17 @@ Example:
 
 ---
 
-## Vector Index Behavior
+## Vector Store Persistence
 
-The current indexing flow rebuilds the Chroma collection during indexing.
+Chroma DB uses persistent storage.
 
-This means:
-- Existing indexed chunks are removed
-- Only the latest indexed dataset remains available
+This allows:
 
-This behavior is intentional for Week 3 testing and debugging.
+- Indexed documents to remain available after application restart
+- Previously indexed documents to remain searchable
+- Multi-document retrieval across sessions
 
-Future versions may support:
-- incremental indexing
-- multi-document persistence
-- append-only indexing
+Duplicate chunks are not added when an already-indexed document is processed again.
 
 ---
 
@@ -214,15 +222,28 @@ Example:
 - sample_report.pdf → supported
 - sample_scanned.pdf → not supported yet
 
-## Current Limitations and Planned Fixes
+## LLM Service Modes
+### Mock Mode
+
+Used for local testing and demonstrations.
+
+Benefits:
+
+- No API access required
+- Deterministic behavior
+- Suitable for coursework demonstrations
+
+NOTE: Currently, no API mode has been added.
+
+## Limitations and Planned Improvements
 
 | Current Limitation | Planned Improvement |
-|---|---|
-| Retrieval quality is still basic | Improve chunking and ranking |
-| Chunk overlap is simple word overlap | Sentence-aware chunking improvements |
-| Only local embeddings are supported | Add optional cloud embedding APIs |
-| Scanned PDFs are not processed correctly | Add OCR pipeline later |
-| Rebuilding index removes previous data | Add incremental indexing |
-| Initial model loading is slow | Add Streamlit caching and optimization |
+|-------------------|---------------------|
+| Retrieval quality depends on chunk quality | Improved ranking and retrieval strategies |
+| Simple chunking approach | More advanced sentence-aware chunking |
+| Limited answer generation in mock mode | Full LLM integration |
+| No OCR support | OCR pipeline for scanned PDFs |
+| Basic retrieval filtering | Relevance thresholds and reranking |
+| Local embedding model only | Optional cloud embedding providers |
 
 ---
