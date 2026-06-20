@@ -11,7 +11,6 @@ Roles and Responsibilities A sample policy often includes roles and responsibili
 ### Retrieved Sources
 
 | Source File | Page | Chunk ID |
-|------------------|----------|
 | sample_report.pdf | 2 |  sample_report.pdf_p2_c3 |
 | sample_policy.txt | N/A |   sample_policy.txt_c2 |
 | sample_policy.txt | N/A |   sample_policy.txt_c3 |
