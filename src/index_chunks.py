@@ -6,7 +6,7 @@ from src.config import (
 )
 
 
-def run_indexing(chunks):
+def run_indexing(chunks, reset=False):
 
     if not chunks:
         return 0
@@ -41,12 +41,20 @@ def run_indexing(chunks):
         chunk["embedding"] = embedding
 
     store = VectorStore(
-        collection_name=COLLECTION_NAME,
-        persist_dir=PERSIST_DIR
+    collection_name=COLLECTION_NAME,
+    persist_dir=PERSIST_DIR
     )
 
-    store.reset_collection()
+    if reset:
+        store.reset_collection()
+
+    before_count = store.count()
 
     store.add_chunks(valid_chunks)
 
-    return store.count()
+    after_count = store.count()
+
+    return {
+        "added": after_count - before_count,
+        "total": after_count
+    }
