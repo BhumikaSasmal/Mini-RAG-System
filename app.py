@@ -4,8 +4,8 @@ import os
 import json
 
 from src.pipeline import process_document
-from src.rag_pipeline import RAGPipeline
 from src.index_chunks import run_indexing
+from src.vector_store import VectorStore
 from src.embedding_service import EmbeddingService
 
 
@@ -82,8 +82,11 @@ if uploaded_file is not None:
             )
 
             if file_type == "txt":
+
                 pages = "N/A"
+
             else:
+
                 pages = len(
                     {
                         c.get("page_number")
@@ -96,9 +99,21 @@ if uploaded_file is not None:
 
             col1, col2, col3, col4 = st.columns(4)
 
-            col1.metric("Chunks", len(chunks))
-            col2.metric("Characters", total_chars)
-            col3.metric("Pages", pages)
+            col1.metric(
+                "Chunks",
+                len(chunks)
+            )
+
+            col2.metric(
+                "Characters",
+                total_chars
+            )
+
+            col3.metric(
+                "Pages",
+                pages
+            )
+
             col4.metric(
                 "Avg Chunk Size",
                 int(summary.get("average_char_count", 0))
@@ -110,14 +125,24 @@ if uploaded_file is not None:
 
             for c in preview_chunks:
 
-                chunk_id = c.get("chunk_id", "unknown")
+                chunk_id = c.get(
+                    "chunk_id",
+                    "unknown"
+                )
+
                 page_number = c.get("page_number")
+
                 text = c.get("text", "")
 
                 if file_type == "txt":
+
                     expander_title = chunk_id
+
                 else:
-                    expander_title = f"{chunk_id} | Page {page_number}"
+
+                    expander_title = (
+                        f"{chunk_id} | Page {page_number}"
+                    )
 
                 with st.expander(expander_title):
                     st.text(text)
@@ -136,9 +161,13 @@ if uploaded_file is not None:
             )
 
     except Exception as e:
-        st.error(f"Processing error: {str(e)}")
+
+        st.error(
+            f"Processing error: {str(e)}"
+        )
 
     finally:
+
         if os.path.exists(temp_path):
             os.remove(temp_path)
 
@@ -147,131 +176,132 @@ st.header("2. Build Vector Index")
 if st.button("Build / Rebuild Vector Index"):
 
     if st.session_state.chunks is None:
-        st.warning("Upload and process a document first.")
+
+        st.warning(
+            "Upload and process a document first."
+        )
 
     else:
         try:
-            with st.spinner("Building vector index..."):
-                stats = run_indexing(st.session_state.chunks)
+            with st.spinner(
+                "Building vector index..."
+            ):
 
-            if stats["added"] == 0:
-                st.info(
-                    "No new chunks were added. "
-                    "This document appears to have already been indexed."
+                indexed_count = run_indexing(
+                    st.session_state.chunks
                 )
-            else:
-                st.success(
-                    f"Added {stats['added']} chunks. "
-                    f"Collection now contains {stats['total']} chunks."
-                )
+
+            st.success(
+                f"Successfully indexed {indexed_count} chunks."
+            )
 
         except Exception as e:
-            st.error(f"Indexing failed: {str(e)}")
+
+            st.error(
+                f"Indexing failed: {str(e)}"
+            )
 
 st.header("3. Semantic Search")
 
-query = st.text_input("Enter a query")
+query = st.text_input(
+    "Enter a query"
+)
 
 if st.button("Search Relevant Chunks"):
 
     if not query.strip():
-        st.warning("Enter a query first.")
+
+        st.warning(
+            "Enter a query first."
+        )
 
     else:
         try:
-            pipeline = RAGPipeline()
+            store = VectorStore()
 
-            if pipeline.store.count() == 0:
-                st.info(
-                    "No documents have been indexed yet. "
-                    "Upload a document and build the vector index first."
+            results = store.query(
+                query_text=query,
+                top_k=3
+            )
+
+            results = sorted(
+                results,
+                key=lambda x: x.get(
+                    "score",
+                    float("inf")
+                )
+            )
+
+            if not results:
+
+                st.warning(
+                    "No relevant results found."
                 )
 
             else:
-                with st.spinner(
-                    "Retrieving document context and generating answer..."
-                ):
-                    response = pipeline.answer_question(query)
 
-                results = response.get("retrieval_results", [])
+                st.subheader("Top Matches")
 
-                if not results or "insufficient" in response["answer"].lower():
-                    st.warning(
-                        "The available document context is insufficient "
-                        "to answer this question."
-                    )
-                    st.subheader("Answer")
-                    st.text(response["answer"])
-                else:
-                    results = sorted(
-                        results,
-                        key=lambda x: x.get("score", float("inf"))
+                for i, r in enumerate(results):
+
+                    metadata = r.get(
+                        "metadata",
+                        {}
                     )
 
-                    st.subheader("Answer")
-                    st.text(response["answer"])
+                    distance = r.get(
+                        "score",
+                        0
+                    )
 
-                    st.subheader("Sources")
+                    similarity = round(
+                        1 / (1 + distance),
+                        4
+                    )
 
-                    for result in results:
-                        metadata = result.get("metadata", {})
-                        page_value = metadata.get("page_number")
+                    st.markdown(
+                        f"### Result {i + 1}"
+                    )
 
-                        if page_value == -1:
-                            page_value = "N/A"
+                    col1, col2, col3 = st.columns(3)
 
-                        preview = result.get("text", "")[:150]
+                    col1.metric(
+                        "Similarity",
+                        similarity
+                    )
 
-                        if len(result.get("text", "")) > 150:
-                            preview += "..."
+                    page_value = metadata.get(
+                        "page_number"
+                    )
 
-                        st.markdown(f"""
-**Source File:** {metadata.get('source_file')}  
+                    if page_value == -1:
+                        page_value = "N/A"
 
-**Page:** {page_value}  
+                    col2.metric(
+                        "Page",
+                        page_value
+                    )
 
-**Chunk ID:** {metadata.get('chunk_id', 'N/A')}  
+                    col3.metric(
+                        "Chunk",
+                        metadata.get("chunk_index")
+                    )
 
-**Preview:** {preview}
-""")
+                    st.write(
+                        f"Source File: {metadata.get('source_file')}"
+                    )
 
-                        st.markdown("---")
+                    st.text_area(
+                        label="Retrieved Text",
+                        value=r.get("text", ""),
+                        height=220,
+                        key=f"result_{i}"
+                    )
 
-                    st.subheader("Retrieved Context")
-
-                    for i, r in enumerate(results):
-
-                        metadata = r.get("metadata", {})
-                        distance = r.get("score", 0)
-
-                        similarity = round(1 / (1 + distance), 4)
-
-                        st.markdown(f"### Result {i + 1}")
-
-                        col1, col2, col3 = st.columns(3)
-
-                        col1.metric("Similarity", similarity)
-
-                        page_value = metadata.get("page_number")
-
-                        if page_value == -1:
-                            page_value = "N/A"
-
-                        col2.metric("Page", page_value)
-                        col3.metric("Chunk", metadata.get("chunk_index"))
-
-                        st.write(
-                            f"Source File: {metadata.get('source_file')}"
-                        )
-
-                        st.text_area(
-                            label="Retrieved Text",
-                            value=r.get("text", ""),
-                            height=220,
-                            key=f"result_{i}"
-                        )
-
-                        st.markdown("---")
+                    st.markdown("---")
 
         except Exception as e:
-            st.error(f"Search failed: {str(e)}")
+
+            st.error(
+                f"Search failed: {str(e)}"
+            )
