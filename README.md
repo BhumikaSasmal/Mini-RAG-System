@@ -124,6 +124,7 @@ mini-rag-system/
 │ ├── index_chunks.py
 │ ├── llm_service.py
 │ ├── rag_pipeline.py
+│ ├── prompt_template.py
 │ └── pipeline.py
 ├── tests/
 │ ├── manual_test_log.md
