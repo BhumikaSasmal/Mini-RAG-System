@@ -1,5 +1,7 @@
 import os
 
+from src.prompt_template import build_rag_prompt
+
 
 class LLMService:
 
@@ -10,31 +12,25 @@ class LLMService:
             "mock"
         ).lower()
 
-        self.api_key = os.getenv(
-            "LLM_API_KEY"
-        )
-
     def generate_answer(
         self,
         question,
         context
     ):
 
-        if self.mode == "mock":
-
-            return self._mock_answer(
-                question,
-                context
-            )
-
-        return self._api_answer(
+        prompt = build_rag_prompt(
             question,
+            context
+        )
+
+        return self._mock_answer(
+            prompt,
             context
         )
 
     def _mock_answer(
         self,
-        question,
+        prompt,
         context
     ):
 
@@ -56,31 +52,3 @@ class LLMService:
             answer += "."
 
         return answer
-
-    def _api_answer(
-        self,
-        question,
-        context
-    ):
-
-        if not self.api_key:
-
-            return (
-                "LLM API configuration is missing. "
-                "Please check environment settings."
-            )
-
-        try:
-
-
-            return (
-                "LLM API mode is configured, "
-                "but no provider has been connected yet."
-            )
-
-        except Exception:
-
-            return (
-                "Unable to generate a response "
-                "from the language model."
-            )
