@@ -66,6 +66,7 @@ class VectorStore:
                 "file_type": str(chunk.get("file_type", "")),
                 "page_number": page_number if page_number is not None else -1,
                 "chunk_index": int(chunk.get("chunk_index", 0)),
+                "chunk_id": chunk_id,
                 "char_count": int(chunk.get("char_count", 0))
             }
 
