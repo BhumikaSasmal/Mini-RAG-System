@@ -13,6 +13,9 @@ Verify that a factual question can be answered from an indexed TXT document.
 ### Question
 What is the document about?
 
+### Status: 
+Pass
+
 ### Result
 -# SAMPLE POLICY DOCUMENT # # Introduction A sample policy serves as a foundational document that outlines the rules, principles, and expectations governing a particular organization, system, or activity. It is designed to provide clarity, ensure consistency in decision-making, and establish a framework within which individuals can operate effectively.
 
@@ -38,6 +41,9 @@ Verify that a factual question can be answered from an indexed PDF document.
 
 ### Question
 What are roles and responsibilities?
+
+### Status: 
+Pass
 
 
 ### Result
@@ -66,6 +72,9 @@ Verify that semantic retrieval works when question wording differs from document
 ### Question
 What defines the scope of a policy?
 
+### Status: 
+Pass
+
 ### Result
 -# SAMPLE POLICY DOCUMENT ## Introduction A sample policy serves as a foundational document that outlines the rules, principles, and expectations governing a particular organization, system, or activity. It is designed to provide clarity, ensure consistency in decision-making, and establish a framework within which individuals can operate effectively.
 
@@ -90,6 +99,10 @@ Verify behavior when the answer is not present in indexed documents.
 ### Question
 Who won the 2023 Cricket World Cup?
 
+### Status: 
+Pass
+
+
 ### Result
 The available document context is insufficient to answer this question.
 
@@ -107,12 +120,16 @@ The available document context is insufficient to answer this question.
 Verify retrieval behavior when multiple documents are indexed.
 
 ### Steps
-1. Upload and index multiple documents. In this case, to verify if exact document is being retrieved, the legacy/sample.txt file about neural networks was also added to the context along with sample policy and sample report.
+1. Upload and index multiple documents. In this case, to verify if the exact document is being retrieved, the legacy/sample.txt file about neural networks was also added to the context along with the sample policy and sample report.
 2. Ask a question specific to one document.
 3. Review source information.
 
 ### Question
 What are neural networks?
+
+### Status: 
+Pass
+
 
 ### Result
 Neural networks are a fundamental concept in the field of artificial intelligence, inspired by the structure and functioning of the human brain. They consist of interconnected units called neurons that work together to process information and solve complex problems.
@@ -138,6 +155,10 @@ Verify that indexed documents remain searchable after restarting the application
 ### Question
 What are the roles and responsibilities?
 
+### Status: 
+Pass
+
+
 ### Result
 Roles and Responsibilities A sample policy often includes roles and responsibilities to clarify who is responsible for what. This section ensures that tasks are appropriately assigned and that there is no overlap or confusion regarding authority.
 
@@ -154,7 +175,8 @@ Roles and Responsibilities A sample policy often includes roles and responsibili
 ### Objective
 Verify answer generation using mock mode.
 
-
+### Status: 
+Pass
 
 ### Observation
 - All previous answers were generated without API credentials; we can say mock mode is working successfully.
@@ -168,6 +190,10 @@ Verify answer generation using mock mode.
 
 ### Objective
 Verify answer generation using configured LLM credentials.
+
+### Status: 
+Not Executed
+
 
 ### Result
 NOT EXECUTED
