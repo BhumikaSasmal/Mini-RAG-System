@@ -79,7 +79,7 @@ Build / Rebuild Vector Index
 - Source attribution
 - Metadata display
 - Retrieved context preview
-- Insufficient-context handling
+- Insufficient-context handling: The UI should notify if the uploaded document does not have enough context to answer the query.
 
 
 8. Run retrieval evaluation manually:
