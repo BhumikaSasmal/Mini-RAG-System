@@ -7,3 +7,5 @@ EMBEDDING_MODEL_NAME = "all-MiniLM-L6-v2"
 COLLECTION_NAME = "documents"
 
 PERSIST_DIR = "vector_store/chroma"
+
+RELEVANCE_THRESHOLD = 1.5
