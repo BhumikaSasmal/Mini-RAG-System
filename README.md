@@ -236,19 +236,19 @@ Benefits:
 - Suitable for coursework demonstrations
 
 #### Generating an answer using the configured LLM mode
-    In mock mode, no LLM inference is performed. The response is an
-    extractive answer formed from the first retrieved context sentences
-    and is intended only for testing the RAG pipeline.
+In mock mode, no LLM inference is performed. The response is an
+extractive answer formed from the first retrieved context sentences
+and is intended only for testing the RAG pipeline.
 
-    Rather than generating a response from the prompt, this method
-    returns the first one or two sentences from the retrieved context.
-    This provides a deterministic, extractive answer and should not be
-    interpreted as true LLM reasoning.
+Rather than generating a response from the prompt, this method
+returns the first one or two sentences from the retrieved context.
+This provides a deterministic, extractive answer and should not be
+interpreted as true LLM reasoning.
 
-    The prompt in prompt_template.py is unused in mock mode. The prompt is built for consistency with the production LLM workflow.
-    In mock mode, it is intentionally ignored because the response is generated directly from the retrieved context.
+The prompt in prompt_template.py is unused in mock mode. The prompt is designed to be consistent with the production LLM workflow.
+In mock mode, it is intentionally ignored because the response is generated directly from the retrieved context.
 
-    Mock mode does not send a prompt to an LLM.
+Mock mode does not send a prompt to an LLM.
 
 NOTE: Currently, no API mode has been added.
 
