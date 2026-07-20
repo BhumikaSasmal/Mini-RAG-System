@@ -75,11 +75,11 @@ Build / Rebuild Vector Index
 - "What are the review requirements?"
 
 6. Verify:
-Answer generation
-Source attribution
-Metadata display
-Retrieved context preview
-Insufficient-context handling
+- Answer generation
+- Source attribution
+- Metadata display
+- Retrieved context preview
+- Insufficient-context handling
 
 
 8. Run retrieval evaluation manually:
