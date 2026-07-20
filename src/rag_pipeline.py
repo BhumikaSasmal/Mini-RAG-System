@@ -1,5 +1,6 @@
 from src.vector_store import VectorStore
 from src.llm_service import LLMService
+from src.config import RELEVANCE_THRESHOLD
 
 class RAGPipeline:
 
@@ -79,7 +80,6 @@ class RAGPipeline:
             question,
             top_k=top_k
         )
-        RELEVANCE_THRESHOLD = 1.5
 
         filtered_chunks = [
             chunk
@@ -95,8 +95,17 @@ class RAGPipeline:
             question,
             context
         )
+        context = self.build_context(
+            filtered_chunks
+        )
+
+        answer = self.llm.generate_answer(
+            question,
+            context
+        )
+
         sources = self.format_sources(
-            retrieved_chunks
+            filtered_chunks
         )
 
         return {
