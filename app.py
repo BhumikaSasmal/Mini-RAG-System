@@ -6,12 +6,6 @@ import json
 from src.pipeline import process_document
 from src.rag_pipeline import RAGPipeline
 from src.index_chunks import run_indexing
-from src.embedding_service import EmbeddingService
-
-
-@st.cache_resource
-def get_embedder():
-    return EmbeddingService()
 
 
 st.set_page_config(
@@ -213,29 +207,17 @@ if st.button("Search Relevant Chunks"):
 
                     st.subheader("Sources")
 
-                    for result in results:
-                        metadata = result.get("metadata", {})
-                        page_value = metadata.get("page_number")
+                    for source in response.get("sources", []):
 
-                        if page_value == -1:
-                            page_value = "N/A"
+                            st.markdown(f"""
+                        **Source File:** {source.get('source_file')}
 
-                        preview = result.get("text", "")[:150]
+                        **Page:** {source.get('page_number')}
 
-                        if len(result.get("text", "")) > 150:
-                            preview += "..."
+                        **Chunk ID:** {source.get('chunk_id', 'N/A')}
+                        """)
 
-                        st.markdown(f"""
-**Source File:** {metadata.get('source_file')}  
-
-**Page:** {page_value}  
-
-**Chunk ID:** {metadata.get('chunk_id', 'N/A')}  
-
-**Preview:** {preview}
-""")
-
-                        st.markdown("---")
+                    st.markdown("---")
 
                     st.subheader("Retrieved Context")
 
