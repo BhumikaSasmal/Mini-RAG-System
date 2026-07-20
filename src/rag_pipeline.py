@@ -95,14 +95,6 @@ class RAGPipeline:
             question,
             context
         )
-        context = self.build_context(
-            filtered_chunks
-        )
-
-        answer = self.llm.generate_answer(
-            question,
-            context
-        )
 
         sources = self.format_sources(
             filtered_chunks
