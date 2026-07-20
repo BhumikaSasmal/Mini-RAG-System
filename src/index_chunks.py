@@ -9,7 +9,10 @@ from src.config import (
 def run_indexing(chunks, reset=False):
 
     if not chunks:
-        return 0
+        return {
+            "added": 0,
+            "total": 0
+        }
 
     valid_chunks = []
 
@@ -26,7 +29,10 @@ def run_indexing(chunks, reset=False):
         valid_chunks.append(chunk)
 
     if not valid_chunks:
-        return 0
+        return {
+            "added": 0,
+            "total": 0
+        }
 
     embedder = EmbeddingService()
 
@@ -41,20 +47,16 @@ def run_indexing(chunks, reset=False):
         chunk["embedding"] = embedding
 
     store = VectorStore(
-    collection_name=COLLECTION_NAME,
-    persist_dir=PERSIST_DIR
+        collection_name=COLLECTION_NAME,
+        persist_dir=PERSIST_DIR
     )
 
     if reset:
         store.reset_collection()
 
-    before_count = store.count()
-
-    store.add_chunks(valid_chunks)
-
-    after_count = store.count()
+    added = store.add_chunks(valid_chunks)
 
     return {
-        "added": after_count - before_count,
-        "total": after_count
+        "added": added,
+        "total": store.count()
     }
