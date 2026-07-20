@@ -6,7 +6,9 @@ from src.config import (
     PERSIST_DIR
 )
 
+
 class VectorStore:
+
     def __init__(
         self,
         collection_name=COLLECTION_NAME,
@@ -21,6 +23,7 @@ class VectorStore:
         self.embedder = EmbeddingService()
 
     def add_chunks(self, chunks):
+
         if not chunks:
             raise ValueError("No chunks provided for indexing.")
 
@@ -50,9 +53,7 @@ class VectorStore:
                 continue
 
             ids.append(chunk_id)
-
             documents.append(text)
-
             embeddings.append(embedding)
 
             page_number = chunk.get("page_number")
@@ -60,11 +61,14 @@ class VectorStore:
             if page_number == "N/A":
                 page_number = None
 
-
             metadata = {
                 "source_file": str(chunk.get("source_file", "")),
                 "file_type": str(chunk.get("file_type", "")),
-                "page_number": page_number if page_number is not None else -1,
+                "page_number": (
+                    page_number
+                    if page_number is not None
+                    else -1
+                ),
                 "chunk_index": int(chunk.get("chunk_index", 0)),
                 "chunk_id": chunk_id,
                 "char_count": int(chunk.get("char_count", 0))
@@ -77,14 +81,67 @@ class VectorStore:
                 "No valid chunks found. Check chunk text and embeddings."
             )
 
-        self.collection.add(
-            ids=ids,
-            documents=documents,
-            embeddings=embeddings,
-            metadatas=metadatas
-        )
+        # Skip chunks that have already been indexed.
+        existing = self.collection.get(ids=ids)
+
+        existing_ids = set(existing.get("ids", []))
+
+        if existing_ids:
+
+            filtered = [
+                (i, d, e, m)
+                for i, d, e, m in zip(
+                    ids,
+                    documents,
+                    embeddings,
+                    metadatas
+                )
+                if i not in existing_ids
+            ]
+
+            if not filtered:
+                return 0
+
+            ids, documents, embeddings, metadatas = map(
+                list,
+                zip(*filtered)
+            )
+
+        try:
+            self.collection.add(
+                ids=ids,
+                documents=documents,
+                embeddings=embeddings,
+                metadatas=metadatas
+            )
+
+        except Exception as e:
+
+            duplicate_ids = [
+                chunk_id
+                for chunk_id in ids
+                if chunk_id in existing_ids
+            ]
+
+            if duplicate_ids:
+                raise ValueError(
+                    "Duplicate chunk IDs detected during indexing: "
+                    f"{', '.join(duplicate_ids[:5])}"
+                    + (
+                        "..."
+                        if len(duplicate_ids) > 5
+                        else ""
+                    )
+                ) from e
+
+            raise ValueError(
+                f"Failed to add chunks to the vector store: {e}"
+            ) from e
+
+        return len(ids)
 
     def reset_collection(self):
+
         name = self.collection.name
 
         self.client.delete_collection(name)
@@ -102,6 +159,7 @@ class VectorStore:
         query_embedding=None,
         top_k=3
     ):
+
         if query_embedding is None:
 
             if not query_text or not query_text.strip():
@@ -109,7 +167,9 @@ class VectorStore:
                     "Query text or query embedding is required."
                 )
 
-            query_embedding = self.embedder.embed_text(query_text)
+            query_embedding = self.embedder.embed_text(
+                query_text
+            )
 
         results = self.collection.query(
             query_embeddings=[query_embedding],
