@@ -16,7 +16,7 @@ In mock mode, it is intentionally ignored because the response is generated dire
 
 Mock mode does not send a prompt to an LLM.
 
-All following tests have been done in Mock Mode.
+All following tests have been done in Mock Mode. The answer quality may be limited due to the usage of mock mode and chunk boundaries.
 ## Test 1: TXT Document Question
 
 ### Objective
