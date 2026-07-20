@@ -1,6 +1,10 @@
 # Sample RAG Outputs
 
 ---
+## NOTE
+All Outputs have been generated using mock mode. The answer quality may be limited due to the usage of mock mode and chunk boundaries.
+
+--- 
 
 ## Example 1
 
