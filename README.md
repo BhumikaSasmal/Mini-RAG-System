@@ -1,8 +1,8 @@
-# Mini-RAG-System Week 4
+# Mini-RAG-System Week 5
 
-The purpose of week 4 is to build on the existing Week 3 implementation by connecting semantic retrieval with answer generation, source display, and a clean user-facing question-answering flow.
+The purpose of Week 5 is to build on the existing Week 4 implementation by connecting semantic retrieval with answer generation, source display, and a clean user-facing question-answering flow.
 
-## Week 4 Scope
+## Week 5 Scope
 - Connect semantic retrieval output with an answer-generation layer.
 - Prepare a structured prompt using retrieved chunks as context.
 - Add an LLM service or approved mock response service for answer generation.
@@ -55,7 +55,7 @@ Build / Rebuild Vector Index
 
 ---
 
-## How to Test Week 4
+## How to Test Week 5
 
 1. Launch the Streamlit application.
 
