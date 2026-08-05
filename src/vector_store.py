@@ -3,7 +3,8 @@ import chromadb
 from src.embedding_service import EmbeddingService
 from src.config import (
     COLLECTION_NAME,
-    PERSIST_DIR
+    PERSIST_DIR,
+    TOP_K_RESULTS
 )
 
 
@@ -157,7 +158,7 @@ class VectorStore:
         self,
         query_text=None,
         query_embedding=None,
-        top_k=3
+        top_k=TOP_K_RESULTS
     ):
 
         if query_embedding is None:
