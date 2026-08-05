@@ -259,8 +259,8 @@ In mock mode, it is intentionally ignored because the response is generated dire
 
 Mock mode does not send a prompt to an LLM.
 
-NOTE: Currently, no API mode has been added.
-NOTE: UI will show a notification when a query is run in mock mode.
+#### NOTE: Currently, no API mode has been added.
+#### NOTE: UI will show a notification when a query is run in mock mode.
 
 ## Limitations and Planned Improvements
 
