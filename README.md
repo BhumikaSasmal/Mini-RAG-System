@@ -85,6 +85,8 @@ Build / Rebuild Vector Index
 - Metadata display
 - Retrieved context preview
 - Insufficient-context handling: The UI should notify if the uploaded document does not have enough context to answer the query.
+- Mock Mode Clarification: The UI should notify when answers are retrieved using Mock Mode.
+- Duplicate Indexing: The UI should notify when the same file is indexed again and no new chunks are added.
 
 
 8. Run retrieval evaluation manually:
