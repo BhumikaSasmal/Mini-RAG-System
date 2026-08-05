@@ -110,6 +110,8 @@ mini-rag-system/
 ├── app.py
 ├── README.md
 ├── requirements.txt
+├── WorkLog_Week5.xlsm
+├── vector_store/
 ├── data/
 │ └── sample_docs/
 │ ├── sample_policy.txt
@@ -119,7 +121,7 @@ mini-rag-system/
 ├── outputs/
 │ ├── chunks_preview_txt.json
 │ ├── chunks_preview_pdf.json
-│ ├── week4_sample_outputs.md
+│ ├── week5_sample_outputs.md
 │ └── retrieval_test_results.md
 ├── src/
 │ ├── __init__.py
@@ -136,7 +138,7 @@ mini-rag-system/
 │ └── pipeline.py
 ├── tests/
 │ ├── manual_test_log.md
-│ └── week3_manual_test_log.md
+│ └── week5_manual_test_log.md
 │ └── week4_manual_test_log.md
 └── legacy/
   ├── text_processing.py
