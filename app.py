@@ -187,15 +187,16 @@ if st.button("Search Relevant Chunks"):
                 ):
                     response = pipeline.answer_question(query)
 
-                results = response.get("retrieval_results", [])
+                results = response.get("retrieved_context", [])
 
-                if not results or "insufficient" in response["answer"].lower():
+                if response.get("status") == "insufficient_context":
                     st.warning(
                         "The available document context is insufficient "
                         "to answer this question."
                     )
                     st.subheader("Answer")
                     st.text(response["answer"])
+
                 else:
                     results = sorted(
                         results,
@@ -205,21 +206,34 @@ if st.button("Search Relevant Chunks"):
                     st.subheader("Answer")
                     st.text(response["answer"])
 
-                    st.subheader("Sources")
+                mode = response.get("mode", "unknown")
 
-                    for source in response.get("sources", []):
+                if mode == "mock":
+                    st.warning(
+                        "Mock Mode: Answers are extraction-based and do not use full LLM reasoning."
+                    )
+                else:
+                    st.caption(f"Mode: {mode}")
 
-                            st.markdown(f"""
+                st.subheader("Sources")
+
+                for source in response.get("sources", []):
+
+                    st.markdown(f"""
                         **Source File:** {source.get('source_file')}
 
                         **Page:** {source.get('page_number')}
 
                         **Chunk ID:** {source.get('chunk_id', 'N/A')}
+                        
+                        **Preview:** {source["preview"]}
                         """)
+                    
+
 
                     st.markdown("---")
 
-                    st.subheader("Retrieved Context")
+                with st.expander("Retrieved Context (Debug / Review)"):
 
                     for i, r in enumerate(results):
 
@@ -232,15 +246,25 @@ if st.button("Search Relevant Chunks"):
 
                         col1, col2, col3 = st.columns(3)
 
-                        col1.metric("Similarity", similarity)
+                        col1.metric(
+                            "Similarity",
+                            similarity
+                        )
 
                         page_value = metadata.get("page_number")
 
                         if page_value == -1:
                             page_value = "N/A"
 
-                        col2.metric("Page", page_value)
-                        col3.metric("Chunk", metadata.get("chunk_index"))
+                        col2.metric(
+                            "Page",
+                            page_value
+                        )
+
+                        col3.metric(
+                            "Chunk",
+                            metadata.get("chunk_index")
+                        )
 
                         st.write(
                             f"Source File: {metadata.get('source_file')}"
