@@ -1,5 +1,7 @@
 # Retrieval Test Results
 
+NOTE: Generated using retrieval_test.py 
+
 ## Query
 
 What is the purpose of a sample policy?
