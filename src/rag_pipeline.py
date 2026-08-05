@@ -1,6 +1,7 @@
 from src.vector_store import VectorStore
 from src.llm_service import LLMService
-from src.config import RELEVANCE_THRESHOLD
+from src.config import RELEVANCE_THRESHOLD, TOP_K_RESULTS
+
 
 class RAGPipeline:
 
@@ -66,7 +67,9 @@ class RAGPipeline:
                 "chunk_id":
                     metadata.get("chunk_id"),
                 "chunk_index":
-                    metadata.get("chunk_index")
+                    metadata.get("chunk_index"),
+                "preview": result.get("text", "")[:150]
+
             })
 
         return sources
@@ -74,7 +77,7 @@ class RAGPipeline:
     def answer_question(
         self,
         question,
-        top_k=3
+        top_k=TOP_K_RESULTS
     ):
         retrieved_chunks = self.retrieve_chunks(
             question,
@@ -100,10 +103,16 @@ class RAGPipeline:
             filtered_chunks
         )
 
+        if filtered_chunks:
+            status = "success"
+        else:
+            status = "insufficient_context"
+
         return {
             "question": question,
             "answer": answer,
+            "status": status,
             "sources": sources,
-            "retrieval_results":
-                retrieved_chunks
+            "retrieved_context": retrieved_chunks,
+            "mode": self.llm.mode
         }
