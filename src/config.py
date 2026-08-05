@@ -9,3 +9,5 @@ COLLECTION_NAME = "documents"
 PERSIST_DIR = "vector_store/chroma"
 
 RELEVANCE_THRESHOLD = 1.5
+
+TOP_K_RESULTS = 3
