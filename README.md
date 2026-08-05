@@ -1,15 +1,20 @@
 # Mini-RAG-System Week 5
 
-The purpose of Week 5 is to build on the existing Week 4 implementation by connecting semantic retrieval with answer generation, source display, and a clean user-facing question-answering flow.
+The Week 5 assignment begins from the current Week 4 codebase. The existing modules for document
+ingestion, chunking, embeddings, vector storage, retrieval, prompt creation, answer generation, source
+display, and manual testing are expected to remain as the foundation for this phase.
 
 ## Week 5 Scope
-- Connect semantic retrieval output with an answer-generation layer.
-- Prepare a structured prompt using retrieved chunks as context.
-- Add an LLM service or approved mock response service for answer generation.
-- Display answers with supporting source details such as file name, page number, and chunk identifier.
-- Improve the Streamlit flow so uploaded documents can be queried in a clear chat-style or question-answer format.
-- Create a manual test log covering retrieval, answer quality, source display, and edge cases.
-- Update README with Week 4 setup, workflow, completed scope, limitations, and next steps.
+- Refine the RAG answer-generation flow so that the response structure is consistent across the
+application, test outputs, and documentation.
+- Improve source handling so that every displayed answer is traceable to retrieved chunks with clear file
+name, page value, chunk ID, and preview text.
+- Clarify the difference between mock answer generation and API-based LLM answer generation in the
+application and README.
+- Improve index management, including duplicate handling and clear rebuild behavior.
+- Strengthen testing evidence using expected result, actual result, status, and remarks for each test case.
+- Prepare the project for Week 6 enhancements such as better UI polish, optional real LLM integration,
+evaluation metrics, and deployment readiness.
 ---
 
 ## Tools and Libraries Used
@@ -251,6 +256,7 @@ In mock mode, it is intentionally ignored because the response is generated dire
 Mock mode does not send a prompt to an LLM.
 
 NOTE: Currently, no API mode has been added.
+NOTE: UI will show a notification when a query is run in mock mode.
 
 ## Limitations and Planned Improvements
 
@@ -260,7 +266,6 @@ NOTE: Currently, no API mode has been added.
 | Simple chunking approach | More advanced sentence-aware chunking |
 | Limited answer generation in mock mode | Full LLM integration |
 | No OCR support | OCR pipeline for scanned PDFs |
-| Basic retrieval filtering | Relevance thresholds and reranking |
 | Local embedding model only | Optional cloud embedding providers |
 
 ---
