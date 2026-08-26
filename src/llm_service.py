@@ -12,6 +12,12 @@ class LLMService:
             "mock"
         ).lower()
 
+        if self.mode != "mock":
+            raise ValueError(
+                f"Unsupported LLM_MODE: '{self.mode}'. "
+                "Only 'mock' mode is currently implemented."
+            )
+
     def generate_answer(
         self,
         question,
