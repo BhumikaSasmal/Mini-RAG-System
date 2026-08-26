@@ -138,7 +138,7 @@ if uploaded_file is not None:
 
 st.header("2. Build Vector Index")
 
-if st.button("Build / Rebuild Vector Index"):
+if st.button("Build / Update Vector Index"):
 
     if st.session_state.chunks is None:
         st.warning("Upload and process a document first.")
@@ -187,7 +187,7 @@ if st.button("Search Relevant Chunks"):
                 ):
                     response = pipeline.answer_question(query)
 
-                results = response.get("retrieved_context", [])
+                results = response.get("retrieved_results", [])
 
                 if response.get("status") == "insufficient_context":
                     st.warning(
@@ -227,13 +227,48 @@ if st.button("Search Relevant Chunks"):
                         **Chunk ID:** {source.get('chunk_id', 'N/A')}
                         
                         **Preview:** {source["preview"]}
+                        
                         """)
                     
+                answer_context = response.get("answer_context", [])
 
+                if answer_context:
 
-                    st.markdown("---")
+                    with st.expander("Context Used for Answer Generation"):
 
-                with st.expander("Retrieved Context (Debug / Review)"):
+                        for i, result in enumerate(answer_context):
+
+                            metadata = result.get("metadata", {})
+
+                            page_value = metadata.get("page_number")
+
+                            if page_value == -1:
+                                page_value = "N/A"
+
+                            st.markdown(f"### Context {i + 1}")
+
+                            st.write(
+                                f"Source File: {metadata.get('source_file')}"
+                            )
+
+                            st.write(f"Page: {page_value}")
+
+                            st.write(
+                                f"Chunk ID: {metadata.get('chunk_id', 'N/A')}"
+                            )
+
+                            st.text_area(
+                                label="Context Text",
+                                value=result.get("text", ""),
+                                height=220,
+                                key=f"context_{i}"
+                            )
+
+                            st.markdown("---")
+
+                                      
+
+                with st.expander("Retrieved Results"):
 
                     for i, r in enumerate(results):
 
