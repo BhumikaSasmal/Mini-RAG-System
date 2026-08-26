@@ -204,4 +204,4 @@ The RAG system successfully demonstrated:
 - Retrieval across multiple indexed documents
 - Grounded answers based on retrieved chunks
 - Use of Mock Mode is clarified.
-- Retrieved context can be checked in an expandable section.
+- Retrieved context and context used for answer can be checked in an expandable section.
