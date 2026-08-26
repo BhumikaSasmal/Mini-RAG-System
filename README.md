@@ -89,13 +89,13 @@ Build / Rebuild Vector Index
 - Duplicate Indexing: The UI should notify when the same file is indexed again and no new chunks are added.
 
 
-8. Run retrieval evaluation manually:
+7. Run retrieval evaluation manually:
 
 ```bash
 python src/retrieval_test.py
 ```
 
-9. Check generated results:
+8. Check generated results:
 
 ```text
 outputs/retrieval_test_results.md
