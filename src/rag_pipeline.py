@@ -113,6 +113,9 @@ class RAGPipeline:
             "answer": answer,
             "status": status,
             "sources": sources,
-            "retrieved_context": retrieved_chunks,
+            "retrieved_results": retrieved_chunks,
+            "answer_context": filtered_chunks,
             "mode": self.llm.mode
+
+            
         }
