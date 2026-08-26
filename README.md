@@ -53,7 +53,7 @@ streamlit run app.py
 5. Click:
 
 ```text
-Build / Rebuild Vector Index
+Build / Update Vector Index
 ```
 
 6. Run semantic search queries from the UI.
