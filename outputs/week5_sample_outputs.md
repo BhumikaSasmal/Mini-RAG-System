@@ -183,6 +183,31 @@ Pass
 | sample_policy.txt | N/A | sample_policy.txt_c2 |
 | sample_report.pdf | 1 | sample_report.pdf_p1_c0 |
 
+### Retrieved Context Preview
+
+**`sample_report.pdf_p2_c3` — Page 2**
+
+> Roles and Responsibilities A sample policy often includes roles and
+> responsibilities to clarify who is responsible for what. This section
+> ensures that tasks are appropriately assigned and that there is no overlap
+> or confusion regarding authority. Clearly defined roles contribute to
+> smoother operations and help prevent conflicts within the organization...
+
+**`sample_policy.txt_c2`**
+
+> carry out their tasks in alignment with the policy’s objectives. Clear
+> implementation guidelines enhance usability and make the policy practical
+> rather than purely theoretical. ## Compliance and Enforcement Compliance
+> and enforcement mechanisms are also essential elements of a sample policy.
+> These mechanisms outline how adherence to the policy will be monitored...
+
+**`sample_report.pdf_p1_c0` — Page 1**
+
+> SAMPLE POLICY DOCUMENT Introduction A sample policy serves as a
+> foundational document that outlines the rules, principles, and
+> expectations governing a particular organization, system, or activity.
+> It is designed to provide clarity, ensure consistency in decision-making...
+
 ---
 
 ## Retrieved Context Preview
@@ -209,8 +234,32 @@ Pass
 | sample_report.pdf | 2 | sample_report.pdf_p2_c3 |
 | sample_policy.txt | N/A | sample_policy.txt_c3 |
 
-Exact chunks can be checked using the Retrieved Context expandable
-section.
+### Retrieved Context Preview
+
+**`sample_policy.txt_c2`**
+
+> carry out their tasks in alignment with the policy’s objectives. Clear
+> implementation guidelines enhance usability and make the policy practical
+> rather than purely theoretical. ## Compliance and Enforcement Compliance
+> and enforcement mechanisms are also essential elements of a sample policy.
+> These mechanisms outline how adherence to the policy will be monitored...
+
+**`sample_report.pdf_p2_c3` — Page 2**
+
+> Roles and Responsibilities A sample policy often includes roles and
+> responsibilities to clarify who is responsible for what. Clearly defined
+> roles contribute to smoother operations and help prevent conflicts within
+> the organization. Review and Revision Procedures Review and revision
+> procedures are necessary to keep a sample policy relevant over time.
+> As organizations evolve and external conditions change, policies must
+> be updated to reflect new requirements, technologies, or regulations...
+
+**`sample_policy.txt_c3`**
+
+> are necessary to keep a sample policy relevant over time. As organizations
+> evolve and external conditions change, policies must be updated to reflect
+> new requirements, technologies, or regulations. Regular reviews ensure
+> that the policy remains effective and aligned with current needs...
 
 ---
 
@@ -222,10 +271,12 @@ What are the review and update requirements?
 
 ### Generated Answer
 
-NOTE: The following message appears:
+**Indexing Result:**
 
-**No new chunks were added. This document appears to have already been
-indexed.**
+No new chunks were added. This document appears to have already been
+indexed.
+
+**Retrieved Answer:**
 
 carry out their tasks in alignment with the policy’s objectives. Clear
 implementation guidelines enhance usability and make the policy practical
@@ -243,8 +294,30 @@ Pass
 | sample_report.pdf | 2 | sample_report.pdf_p2_c3 |
 | sample_policy.txt | N/A | sample_policy.txt_c3 |
 
-Exact chunks can be checked using the Retrieved Context expandable
-section.
+### Retrieved Context Preview
+
+**`sample_policy.txt_c2`**
+
+> carry out their tasks in alignment with the policy’s objectives. Clear
+> implementation guidelines enhance usability and make the policy practical
+> rather than purely theoretical. ## Compliance and Enforcement Compliance
+> and enforcement mechanisms are also essential elements of a sample policy...
+
+**`sample_report.pdf_p2_c3` — Page 2**
+
+> Roles and Responsibilities A sample policy often includes roles and
+> responsibilities to clarify who is responsible for what. This section
+> ensures that tasks are appropriately assigned and that there is no overlap
+> or confusion regarding authority. Review and Revision Procedures Review
+> and revision procedures are necessary to keep a sample policy relevant
+> over time...
+
+**`sample_policy.txt_c3`**
+
+> are necessary to keep a sample policy relevant over time. As organizations
+> evolve and external conditions change, policies must be updated to reflect
+> new requirements, technologies, or regulations. Regular reviews ensure
+> that the policy remains effective and aligned with current needs...
 
 ---
 
@@ -273,6 +346,24 @@ Pass
 |-------------|------|----------|
 | sample_report.pdf | 1 | sample_report.pdf_p1_c0 |
 | sample_policy.txt | N/A | sample_policy.txt_c0 |
+
+### Retrieved Context Preview
+
+**`sample_report.pdf_p1_c0` — Page 1**
+
+> SAMPLE POLICY DOCUMENT Introduction A sample policy serves as a
+> foundational document that outlines the rules, principles, and
+> expectations governing a particular organization, system, or activity.
+> It is designed to provide clarity, ensure consistency in decision-making,
+> and establish a framework within which individuals can operate effectively...
+
+**`sample_policy.txt_c0`**
+
+> # SAMPLE POLICY DOCUMENT ## Introduction A sample policy serves as a
+> foundational document that outlines the rules, principles, and
+> expectations governing a particular organization, system, or activity.
+> It is designed to provide clarity, ensure consistency in decision-making,
+> and establish a framework within which individuals can operate effectively...
 
 ---
 
@@ -307,6 +398,24 @@ Pass
 | sample_report.pdf | 1 | sample_report.pdf_p1_c0 |
 | sample_policy.txt | N/A | sample_policy.txt_c0 |
 
+### Retrieved Context Preview
+
+**`sample_report.pdf_p1_c0` — Page 1**
+
+> SAMPLE POLICY DOCUMENT Introduction A sample policy serves as a
+> foundational document that outlines the rules, principles, and
+> expectations governing a particular organization, system, or activity.
+> It is designed to provide clarity, ensure consistency in decision-making,
+> and establish a framework within which individuals can operate effectively...
+
+**`sample_policy.txt_c0`**
+
+> # SAMPLE POLICY DOCUMENT ## Introduction A sample policy serves as a
+> foundational document that outlines the rules, principles, and
+> expectations governing a particular organization, system, or activity.
+> It is designed to provide clarity, ensure consistency in decision-making,
+> and establish a framework within which individuals can operate effectively...
+
 ---
 
 # Summary
@@ -321,7 +430,6 @@ The RAG system successfully demonstrated:
 - Retrieval across multiple indexed documents
 - Grounded answers based on retrieved chunks
 - Mock mode behavior is clearly communicated
-- Representative TXT, PDF, and insufficient-context scenarios include
-  retrieved-context previews for independent review
-- Retrieved context and context used for the answer can be checked in
-  an expandable section
+- Retrieved-context previews are included for every test scenario
+- Each output can be reviewed independently using the generated answer,
+  sources, and representative retrieved-context excerpts
