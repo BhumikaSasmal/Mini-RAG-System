@@ -72,7 +72,7 @@ Build / Rebuild Vector Index
 - page handling
 - JSON export
 
-4. Build the vector index using the indexing button.
+4. Click **Build / Update Vector Index** to index the processed chunks.
 
 5. Run semantic search queries such as:
 - "What is the purpose of a sample policy?"
@@ -95,7 +95,7 @@ Build / Rebuild Vector Index
 python src/retrieval_test.py
 ```
 
-8. Check generated results:
+9. Check generated results:
 
 ```text
 outputs/retrieval_test_results.md
