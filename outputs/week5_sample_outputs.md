@@ -93,14 +93,14 @@ pass
 
 ### Retrieved Sources
 
-| Source File | Page | Chunk ID | 
+| Source File | Page | Chunk ID |
 |-------------|------|----------|
-| sample_report.pdf | 1 | sample_report.pdf_p2_c3 |
+| sample_report.pdf | 2 | sample_report.pdf_p2_c3 |
 | sample_policy.txt | N/A | sample_policy.txt_c2 |
-| sample_report.pdf | 2 | sample_report.pdf_p1_c0 |
-
+| sample_report.pdf | 1 | sample_report.pdf_p1_c0 |
 
 ---
+
 
 ## Retrieved context preview
 
