@@ -151,8 +151,6 @@ mini-rag-system/
 
 ---
 
----
-
 ## Chunk Metadata
 
 Each chunk stores metadata used during retrieval and debugging.
