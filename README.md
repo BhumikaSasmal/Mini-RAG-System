@@ -1,3 +1,42 @@
+# Mini-RAG-System Week 6
+
+The Week 6 release builds upon the foundational retrieval pipeline by integrating active LLM-backed answer generation via Google Gemini, introducing system mode toggling, establishing strict prompt-grounding controls, and implementing comprehensive automated unit testing.
+
+---
+
+## Week 6 Scope & Highlights
+
+* **Google Gemini Integration (`gemini-3.6-flash`):** Replaced mock-only extractions with live, grounded natural language synthesis via the `google-genai` SDK.
+* **Dual Execution Modes:** Seamless switching between `gemini` (LLM-backed answer synthesis) and `mock` (offline extractive fallback) modes via UI controls and configuration.
+* **Strict Prompt Grounding & Fallback:** Enforced strict RAG system prompt constraints to eliminate hallucinations. Queries without sufficient document context cleanly trigger a safety message.
+* **Source Traceability & Metadata:** Clear display of source attributions (file name, page number, chunk ID, and snippet preview) for every generated answer.
+* **API Error Handling & Resilience:** Non-blocking UI warnings for missing `GEMINI_API_KEY` credentials and graceful exception handling for provider/API failures.
+* **Automated & Manual Testing Evidence:** Unit testing suite covering `LLMService` using `pytest`, paired with comprehensive manual test logs for answer quality, source traceability, and mode comparison.
+
+---
+
+## Tools and Libraries Used
+
+* **Language & Runtime:** Python 3.10+
+* **LLM Provider:** Google Gemini API (`gemini-3.6-flash`) via `google-genai` SDK
+* **UI Framework:** Streamlit
+* **Vector Store & Embeddings:** Chroma DB & Sentence Transformers (`all-MiniLM-L6-v2`)
+* **PDF Processing:** PyMuPDF (`fitz`)
+* **Testing:** `pytest` & `unittest.mock`
+* **Environment Management:** `python-dotenv`
+
+---
+
+## Setup & Configuration
+
+### 1. Environment Setup
+
+Create a `.env` file in the project root directory:
+
+```env
+LLM_MODE=gemini
+GEMINI_API_KEY=your_actual_gemini_api_key_here
+LLM_MODEL_NAME=gemini-3.6-flash
 
 ## Setup & Configuration
 
