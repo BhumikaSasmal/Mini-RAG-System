@@ -5,3 +5,5 @@ sentence-transformers
 numpy
 pandas
 python-dotenv
+google-genai
+pytest
