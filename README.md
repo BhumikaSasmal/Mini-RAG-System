@@ -151,12 +151,68 @@ mini-rag-system/
 
 ---
 
-## Chunk Metadata & Vector Persistence
+---
 
-Chroma DB persists indexed vector embeddings across restarts. Chunks store granular metadata for strict source attribution:
+## Chunk Metadata
 
-* **PDF Chunk Format:** `sample_report.pdf_p1_c0` (`p1` = Page 1, `c0` = Chunk 0)
-* **TXT Chunk Format:** `sample_policy.txt_c0` (Page is displayed as `N/A`)
+Each chunk stores metadata used during retrieval and debugging.
 
+### chunk_id
+
+Example:
+
+```text
+sample_report.pdf_p3_c12
+```
+
+Meaning:
+- `sample_report.pdf` → source file
+- `p3` → page number
+- `c12` → global chunk number
+
+NOTE: page number metadata is only applicable for PDF files. For .txt files, there is no page number in chunk_id.
+
+Example:
+
+```text
+sample_policy.txt_c3
+```
+
+### chunk_index
+
+Represents the local chunk position within a page or document section.
+
+Example:
+- `0`
+- `1`
+- `2`
+
+---
+
+## Vector Store Persistence
+
+Chroma DB uses persistent storage.
+
+This allows:
+
+- Indexed documents to remain available after application restart
+- Previously indexed documents to remain searchable
+- Multi-document retrieval across sessions
+
+Duplicate chunks are not added when an already-indexed document is processed again.
+
+---
+
+
+
+## OCR and Scanned PDF Note
+
+The current implementation works only with machine-readable PDFs.
+
+Scanned PDFs require OCR (Optical Character Recognition), which is currently out of scope unless added in a future version.
+
+Example:
+- sample_report.pdf → supported
+- sample_scanned.pdf → not supported yet
 Duplicate document uploads are detected during ingestion to prevent redundant chunk storage in the database.
 
