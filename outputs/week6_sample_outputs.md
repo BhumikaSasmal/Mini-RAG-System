@@ -1,4 +1,4 @@
-# Week 6 Evaluation & Retrieval Sample Outputs
+# Week 6 Evaluation & Sample Outputs
 
 ---
 
