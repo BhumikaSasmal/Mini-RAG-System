@@ -5,84 +5,41 @@ from src.config import RELEVANCE_THRESHOLD, TOP_K_RESULTS
 
 class RAGPipeline:
 
-    def __init__(self):
+    def __init__(self, llm_mode=None):
         self.store = VectorStore()
-        self.llm = LLMService()
+        self.llm = LLMService(mode=llm_mode)
 
-    def retrieve_chunks(
-        self,
-        question,
-        top_k=3
-    ):
-        return self.store.query(
-            query_text=question,
-            top_k=top_k
-        )
+    def retrieve_chunks(self, question, top_k=3):
+        return self.store.query(query_text=question, top_k=top_k)
 
-    def build_context(
-        self,
-        retrieved_chunks
-    ):
+    def build_context(self, retrieved_chunks):
         context_parts = []
-
         for result in retrieved_chunks:
-
-            text = result.get(
-                "text",
-                ""
-            ).strip()
-
+            text = result.get("text", "").strip()
             if text:
                 context_parts.append(text)
-
         return "\n\n".join(context_parts)
 
-    def format_sources(
-        self,
-        retrieved_chunks
-    ):
+    def format_sources(self, retrieved_chunks):
         sources = []
-
         for result in retrieved_chunks:
-
-            metadata = result.get(
-                "metadata",
-                {}
-            )
-
-            page_number = metadata.get(
-                "page_number"
-            )
-
-            if page_number == -1:
+            metadata = result.get("metadata", {})
+            page_number = metadata.get("page_number")
+            if page_number == -1 or page_number is None:
                 page_number = "N/A"
 
             sources.append({
-                "source_file":
-                    metadata.get("source_file"),
-                "file_type":
-                    metadata.get("file_type"),
-                "page_number":
-                    page_number,
-                "chunk_id":
-                    metadata.get("chunk_id"),
-                "chunk_index":
-                    metadata.get("chunk_index"),
-                "preview": result.get("text", "")[:150]
-
+                "source_file": metadata.get("source_file"),
+                "file_type": metadata.get("file_type"),
+                "page_number": page_number,
+                "chunk_id": metadata.get("chunk_id"),
+                "chunk_index": metadata.get("chunk_index"),
+                "preview": result.get("text", "")[:150],
             })
-
         return sources
 
-    def answer_question(
-        self,
-        question,
-        top_k=TOP_K_RESULTS
-    ):
-        retrieved_chunks = self.retrieve_chunks(
-            question,
-            top_k=top_k
-        )
+    def answer_question(self, question, top_k=TOP_K_RESULTS):
+        retrieved_chunks = self.retrieve_chunks(question, top_k=top_k)
 
         filtered_chunks = [
             chunk
@@ -90,23 +47,11 @@ class RAGPipeline:
             if chunk.get("score", 999) < RELEVANCE_THRESHOLD
         ]
 
-        context = self.build_context(
-            filtered_chunks
-        )
+        context = self.build_context(filtered_chunks)
+        answer = self.llm.generate_answer(question, context)
+        sources = self.format_sources(filtered_chunks)
 
-        answer = self.llm.generate_answer(
-            question,
-            context
-        )
-
-        sources = self.format_sources(
-            filtered_chunks
-        )
-
-        if filtered_chunks:
-            status = "success"
-        else:
-            status = "insufficient_context"
+        status = "success" if filtered_chunks else "insufficient_context"
 
         return {
             "question": question,
@@ -115,7 +60,5 @@ class RAGPipeline:
             "sources": sources,
             "retrieved_results": retrieved_chunks,
             "answer_context": filtered_chunks,
-            "mode": self.llm.mode
-
-            
+            "mode": self.llm.mode,
         }
