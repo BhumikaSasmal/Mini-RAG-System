@@ -118,7 +118,6 @@ mini-rag-system/
 │       ├── sample_report.pdf
 │       └── sample_scanned.pdf
 ├── outputs/
-│   ├── week6_evaluation_summary.md
 │   ├── week6_sample_outputs.md
 │   └── retrieval_test_results.md
 ├── src/
@@ -133,6 +132,7 @@ mini-rag-system/
 │   └── prompt_template.py
 └── tests/
     ├── test_llm_service.py
+    ├── week6_evaluation_summary.md
     └── week6_manual_test_log.md
 
 ```
